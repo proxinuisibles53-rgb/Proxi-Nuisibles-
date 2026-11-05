@@ -1,5 +1,13 @@
 # Journal des modifications
 
+## 2026-11-05 (soir)
+- Vidéo de nid primaire en fond du haut de page sur « Frelons et guêpes ».
+- Photo du badigeon en fond du haut de page sur « Mouches » ; la miniature de
+  l'encart est retirée, sa légende passe dans le texte.
+- « Débarras » revient dans le menu « Mes services », en orange avec un chevron.
+- Menu « Mes services » resserré : il tient en entier sur un écran d'ordinateur
+  portable (419 px au lieu de 575 px).
+
 ## 2026-11-05
 - Site déplacé dans `public/` : Cloudflare publie ce dossier, le générateur reste privé.
 - Première mise en ligne du dépôt : 267 pages, plus le générateur dans `_generateur/`.

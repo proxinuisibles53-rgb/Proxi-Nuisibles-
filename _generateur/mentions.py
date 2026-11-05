@@ -179,15 +179,14 @@ P["/qui-suis-je/"]["pre"] = P["/qui-suis-je/"].get("pre", "") + _GAL
 # --- Encart badigeon sur la page Mouches ---
 _BADIGEON = ("<section class='sec'><div class='wrap'><div class='band'>"
  "<span class='label'>Ma solution phare</span><h2>Le badigeon : une seule application pour toute la saison</h2>"
- "<figure class='mini'><img src='/media/badigeon-application.webp' alt=\"Application au pinceau d'un badigeon anti-mouches sur le dormant d'une fenêtre\" width='520' height='693' loading='lazy'>"
- "<figcaption>Le badigeon s'applique au pinceau, en bandes discrètes sur les zones où les mouches se posent.</figcaption></figure>"
+
  "<p>C'est le traitement que je recommande en premier chez les particuliers, et c'est celui qui change vraiment la vie. "
  "Au lieu de pulvériser toutes les semaines, de suspendre des rubans collants et de racheter des bombes tout l'été, "
  "j'applique un badigeon une seule fois, à l'intérieur, sur les surfaces où les mouches viennent se poser. "
  "Elles s'y contaminent d'elles-mêmes, et le traitement reste actif de mai à décembre.</p>"
  "<p>Ce que cela change chez vous : plus de mouches dans la cuisine, la véranda ou la buanderie pendant toute la belle saison, "
  "sans odeur de bombe insecticide à chaque repas. Vous et vos animaux restez sur place : il n'y a ni évacuation du logement, "
- "ni vaisselle à ranger, ni bâche à poser. J'applique le badigeon en hauteur, sur les zones de repos des mouches, "
+ "ni vaisselle à ranger, ni bâche à poser. Le badigeon s'applique au pinceau, en bandes discrètes, en hauteur et sur les zones de repos des mouches, "
  "à l'écart des plans de travail, des aliments et des gamelles.</p>"
  "<p>Cela fonctionne aussi très bien dans une dépendance, un garage, un abri de jardin, un chenil ou un bâtiment d'élevage. "
  "Le mieux est d'intervenir au printemps, avant que la population ne monte : une visite suffit pour être tranquille jusqu'aux premiers froids.</p>"
