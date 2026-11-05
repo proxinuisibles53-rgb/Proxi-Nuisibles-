@@ -1,6 +1,8 @@
 # Journal des modifications
 
 ## 2026-11-05 — Mise en ligne
+- Formulaire de contact basculé de FormSubmit vers Web3Forms (pas d'activation
+  à cliquer) ; mentions légales mises à jour en conséquence.
 - Site en ligne sur https://www.proxinuisibles.fr via Cloudflare Pages,
   relié à ce dépôt (branche `main`, dossier `public`).
 - Le domaine est enregistré chez OVH mais géré par Cloudflare

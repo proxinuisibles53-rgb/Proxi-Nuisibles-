@@ -81,8 +81,8 @@ var m=document.getElementById('cform-msg'),b=f.querySelector('button[type=submit
 function show(t,ok){m.hidden=false;m.className='cform-msg '+(ok?'ok':'ko');m.textContent=t;}
 var req=f.querySelectorAll('[required]');for(var i=0;i<req.length;i++){if(!req[i].value.trim()){show('Merci de remplir tous les champs.',false);req[i].focus();return;}}
 var em=f.querySelector('[type=email]');if(em.value.indexOf('@')<1){show('Merci de saisir une adresse e-mail valide.',false);em.focus();return;}
-if(f.querySelector('[name=_honey]').value){return;}
+var hp=f.querySelector('[name=botcheck]');if(hp&&hp.checked){return;}
 b.disabled=true;b.textContent='Envoi en cours...';
 var d=new FormData(f);
-fetch(f.dataset.endpoint,{method:'POST',body:d,headers:{'Accept':'application/json'}}).then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(r.ok&&j.success!=='false'){f.reset();show('Merci, votre demande est bien envoyée. Je vous réponds rapidement.',true);}else{throw new Error('x');}});}).catch(function(){show('Envoi impossible pour le moment. Appelez-moi au 06 64 57 66 55 ou écrivez à proxinuisibles53@gmail.com.',false);}).then(function(){b.disabled=false;b.textContent='Envoyer ma demande';});
+fetch(f.dataset.endpoint,{method:'POST',body:d,headers:{'Accept':'application/json'}}).then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(r.ok&&j.success===true){f.reset();show('Merci, votre demande est bien envoyée. Je vous réponds rapidement.',true);}else{throw new Error('x');}});}).catch(function(){show('Envoi impossible pour le moment. Appelez-moi au 06 64 57 66 55 ou écrivez à proxinuisibles53@gmail.com.',false);}).then(function(){b.disabled=false;b.textContent='Envoyer ma demande';});
 });

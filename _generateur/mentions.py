@@ -146,7 +146,8 @@ for _x in _t: _s.remove(_x)
 _u["secs"] = _t + _s
 
 # --- Page Devis et contact : formulaire ---
-FORM_ENDPOINT = "https://formsubmit.co/ajax/" + MAIL
+FORM_ENDPOINT = "https://api.web3forms.com/submit"
+FORM_KEY = "822629ff-e51d-4850-ae6d-dd6e55302c89"
 _FORM = """<section class='sec'><div class='wrap'><span class='label'>Formulaire</span><h2>Demandez votre devis gratuit</h2>
 <p>Je vous réponds rapidement par téléphone ou par e-mail.</p>
 <form class='cform' id='cform' method='post' action='%s' data-endpoint='%s' novalidate>
@@ -155,14 +156,14 @@ _FORM = """<section class='sec'><div class='wrap'><span class='label'>Formulaire
 <label>E-mail<input type='email' name='E-mail' autocomplete='email' required></label>
 <label>Téléphone<input type='tel' name='Téléphone' autocomplete='tel' required></label>
 <label class='full'>Votre message<textarea name='Message' placeholder='Votre commune, le nuisible concerné, depuis quand, particulier ou professionnel…' required></textarea></label>
-<input class='hp' type='text' name='_honey' tabindex='-1' autocomplete='off' aria-hidden='true'>
-<input type='hidden' name='_subject' value='Demande de devis depuis le site Proxinuisibles'>
-<input type='hidden' name='_template' value='table'>
-<input type='hidden' name='_captcha' value='false'>
+<input type='hidden' name='access_key' value='CLE_WEB3FORMS'>
+<input type='hidden' name='subject' value='Demande de devis depuis le site Proxinuisibles'>
+<input type='hidden' name='from_name' value='Site Proxinuisibles'>
+<input class='hp' type='checkbox' name='botcheck' tabindex='-1' autocomplete='off' aria-hidden='true'>
 <p class='rgpd full'>Les informations saisies servent uniquement à répondre à votre demande. Elles ne sont ni revendues ni conservées sur ce site.</p>
 <div class='full'><button class='btn' type='submit'>Envoyer ma demande</button></div>
 <div class='cform-msg' id='cform-msg' hidden role='status'></div>
-</form></div></section>""" % (FORM_ENDPOINT, FORM_ENDPOINT)
+</form></div></section>""".replace("CLE_WEB3FORMS", FORM_KEY) % (FORM_ENDPOINT, FORM_ENDPOINT)
 P["/contact/"]["pre"] = P["/contact/"].get("pre", "") + _FORM
 
 # --- Photos de Gwendal sur la page Qui suis-je ---
