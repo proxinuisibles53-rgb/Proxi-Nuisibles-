@@ -7,9 +7,12 @@
   relié à ce dépôt (branche `main`, dossier `public`).
 - Le domaine est enregistré chez OVH mais géré par Cloudflare
   (serveurs de noms `augustus` et `jessica.ns.cloudflare.com`).
-- Reste à faire : redirection de l'adresse sans `www`, correction du double
-  enregistrement SPF, activation du formulaire FormSubmit, envoi du sitemap
-  dans la Search Console.
+- Redirection de `proxinuisibles.fr` vers `https://www.proxinuisibles.fr` en 301
+  (enregistrement AAAA `@` vers `100::` proxié + Redirect Rule Cloudflare).
+- Formulaire de contact vérifié et fonctionnel.
+- Reste à faire : supprimer le second enregistrement SPF (`include:sendgrid.net`),
+  envoyer le sitemap dans la Search Console, nettoyer les restes de l'ancien
+  hébergeur (`autoconfig`, `autodiscover`, DKIM `mandrill` et `smtpapi`).
 
 ## 2026-11-05 (soir)
 - Vidéo de nid primaire en fond du haut de page sur « Frelons et guêpes ».
