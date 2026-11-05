@@ -1,6 +1,7 @@
 # Journal des modifications
 
 ## 2026-11-05
+- Site déplacé dans `public/` : Cloudflare publie ce dossier, le générateur reste privé.
 - Première mise en ligne du dépôt : 267 pages, plus le générateur dans `_generateur/`.
 - Hauts de page : la vidéo (ou la photo) remplace le bloc de couleur sur les pages
   qui en ont une ; dégradé avec lueur orange sur les autres. Page d'accueil laissée

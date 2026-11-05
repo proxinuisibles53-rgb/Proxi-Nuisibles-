@@ -10,10 +10,9 @@ Toutes les pages sont générées par un script Python, puis déposées telles q
 à la racine de ce dépôt. Cloudflare Pages publie la racine automatiquement à
 chaque envoi.
 
-- **Racine du dépôt** : le site publié (`index.html`, `style.css`, `site.js`,
-  `media/`, et un dossier par page).
-- **`_generateur/`** : le code qui produit le site. Ce dossier n'est pas publié
-  (voir `.assetsignore`).
+- **`public/`** : le site publié (`index.html`, `style.css`, `site.js`,
+  `media/`, et un dossier par page). C'est ce dossier que Cloudflare met en ligne.
+- **`_generateur/`** : le code qui produit le site. Ce dossier n'est pas publié.
 
 ## Régénérer le site
 
@@ -23,7 +22,7 @@ python3 build.py      # écrit le site dans ./site
 python3 preview.py    # produit un aperçu en un seul fichier HTML
 ```
 
-Puis recopier le contenu de `_generateur/site/` à la racine du dépôt et pousser.
+Puis recopier le contenu de `_generateur/site/` dans `public/` et pousser.
 
 ## Contenu du générateur
 
@@ -49,4 +48,15 @@ Ils sont intégrés au fichier `avis.js` lors de la génération.
 ## Déploiement
 
 Cloudflare Pages est relié à ce dépôt et publie la branche `main` à chaque envoi.
-`wrangler.jsonc` et `.assetsignore` servent à cette publication.
+
+Réglages du projet Cloudflare Pages :
+
+| Réglage | Valeur |
+|---|---|
+| Branche de production | `main` |
+| Préréglage de framework | Aucun (*None*) |
+| Commande de compilation | *(vide)* |
+| Répertoire de sortie | `public` |
+
+`wrangler.jsonc` n'est utile que pour un déploiement en ligne de commande
+(`npx wrangler deploy`) ; Cloudflare Pages ne s'en sert pas.
