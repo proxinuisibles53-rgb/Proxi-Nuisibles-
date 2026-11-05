@@ -1,0 +1,36 @@
+{
+  "nombre_total": 118,
+  "note_moyenne": 5,
+  "avis": [
+    {
+      "auteur": "Natacha P.",
+      "note": 5,
+      "date": "Septembre 2026",
+      "texte": "Très bonne expérience, professionnel de qualité. J'avais un nid de frelons, je l'ai appelé lundi soir il était là le mardi. Efficace et vous expliquer tout parfaitement. Je recommande à 100%."
+    },
+    {
+      "auteur": "Louis R.",
+      "note": 5,
+      "date": "Septembre 2026",
+      "texte": "Nous avons fait appel à ce professionnel car un nuisible de type rongeur était dans notre cuisine. Il est intervenu en à peine deux heures à notre domicile, alors que d'autres annonçaient un délai de huit jours et ne souhaitait pas chasser l'animal, nous sommes vraiment reconnaissant de son professionnalisme, des conseils apportés, ainsi que son amabilité. Nous recommandons vivement ce professionnel dans le traitement des nuisibles, j'en fais d'ailleurs la même la promotion dès que j'en ai l'occasion."
+    },
+    {
+      "auteur": "Beatrice F.",
+      "note": 5,
+      "date": "Septembre 2026",
+      "texte": "Contacté pour un nid de guêpes. L'intervention a été efficace. Professionnel à l'écoute, prend le temps d'expliquer. Je n'hésiterais pas à faire à nouveau appel à ses services."
+    },
+    {
+      "auteur": "Mathieu L.",
+      "note": 5,
+      "date": "Juillet 2026",
+      "texte": "Très professionnel : des réponses aux questions, de l'outillage pro. Je dirais qu'il est là pour « chercher la petite bête » avec ironie ! Encore merci 👍"
+    },
+    {
+      "auteur": "Céline G.",
+      "note": 5,
+      "date": "Juin 2026",
+      "texte": "Professionnel à l'écoute et très réactif ! Contacté en fin de matinée pour un nid de guêpes en hauteur sur l'habitation. Intervention le jour même en début de soirée. Je n'hésiterai pas à refaire appel à lui si nécessaire. Vous pouvez lui faire confiance pour éradiquer votre problème de nuisibles ! Un grand merci !"
+    }
+  ]
+}

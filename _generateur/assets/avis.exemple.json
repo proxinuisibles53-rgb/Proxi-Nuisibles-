@@ -1,0 +1,9 @@
+{
+  "nombre_total": 3,
+  "note_moyenne": 5,
+  "avis": [
+    {"auteur": "EXEMPLE – Prénom N.", "note": 5, "date": "Octobre 2026", "texte": "EXEMPLE : remplacez ce texte par un vrai avis copié depuis votre fiche Google."},
+    {"auteur": "EXEMPLE – Prénom N.", "note": 5, "date": "Septembre 2026", "texte": "EXEMPLE : un deuxième avis, avec ses propres mots, par exemple sur un nid de frelons traité rapidement."},
+    {"auteur": "EXEMPLE – Prénom N.", "note": 4, "date": "Août 2026", "texte": "EXEMPLE : même un avis à 4 étoiles est utile, il rend l'ensemble plus crédible."}
+  ]
+}

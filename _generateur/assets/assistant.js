@@ -1,0 +1,77 @@
+
+/* Assistant d'orientation : aucun serveur, aucun cookie. Il propose la bonne page du site selon les mots saisis. */
+(function () {
+  if (window.__asst) { return; }
+  window.__asst = true;
+  var COM = /*COM*/{};
+  var SUJETS = [
+    [/frelon asiatique|velutina|pattes jaunes/, "Frelon asiatique", "/frelon-asiatique/"],
+    [/frelon|gu[eê]pe|vespa|\bnid/, "Nid de frelons ou de guêpes", "/frelons-guepes/"],
+    [/\brats?\b|souris|rongeur|mulot|d[eé]ratis|surmulot|loir/, "Rats, souris et rongeurs", "/deratisation/"],
+    [/punaise|piq[uû]re/, "Punaises de lit", "/punaises-de-lit/"],
+    [/chenille|processionnaire/, "Chenilles processionnaires", "/chenilles-processionnaires/"],
+    [/taupe|taupini/, "Taupes", "/taupier/"],
+    [/pigeon|fiente|goeland|go[eé]land/, "Pigeons et oiseaux", "/depigeonnage/"],
+    [/fouine|martre|ragondin|musqu|corbeau|corvid|pi[eè]ge/, "Fouines, ragondins, corvidés", "/piegeur-agree/"],
+    [/cafard|blatte|cancrelat/, "Cafards et blattes", "/blattes-cafards/"],
+    [/fourmi/, "Fourmis", "/fourmis/"],
+    [/mouche|mouches|drosophile|moucheron/, "Mouches", "/mouches/"],
+    [/puce|puces/, "Puces", "/puces/"],
+    [/insecte|moustique|mite|d[eé]sinsect/, "Autres insectes", "/desinsectisation/"],
+    [/restaurant|boulang|boucher|charcut|traiteur|cuisine|p[aâ]tiss|m[eé]tiers? de bouche/, "Contrats métiers de bouche", "/contrats-metiers-de-bouche/"],
+    [/syndic|agence|copropri|immobili|bailleur|locatif/, "Agences immobilières et syndics", "/agences-syndics/"],
+    [/agricul|[eé]leveur|ferme|exploitation|[eé]table|hangar|silo|[eé]levage/, "Agriculteurs et éleveurs", "/agriculteurs/"],
+    [/mairie|[eé]cole|collectivit|entreprise|professionnel|entrep[oô]t|commerce|magasin|bureau/, "Professionnels et collectivités", "/professionnels/"],
+    [/contrat|annuel|suivi/, "Contrat annuel avec compte rendu", "/contrat-annuel-deratisation/"],
+    [/particulier|maison|jardin|logement|appartement/, "Particuliers", "/particuliers/"],
+    [/devis|prix|tarif|co[uû]t|combien|rendez|contact|urgence|appel/, "Demander un devis gratuit", "/contact/"],
+    [/zone|secteur|intervenez|r[eé]gion|commune|ville/, "Mes zones d'intervention", "/zones-intervention/"]
+  ];
+  function norm(s) { return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/['’\-]/g, " ").replace(/\s+/g, " ").trim(); }
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) { e.className = cls; } if (txt !== undefined) { e.textContent = txt; } return e; }
+  function chercher(q) {
+    var n = norm(q), res = [], vus = {};
+    function add(l, u) { if (!vus[u] && res.length < 4) { vus[u] = 1; res.push([l, u]); } }
+    Object.keys(COM).forEach(function (k) { if (n.indexOf(k) > -1) { add("Dératisation à " + COM[k][0], COM[k][1]); } });
+    SUJETS.forEach(function (s) { if (s[0].test(q.toLowerCase()) || s[0].test(n)) { add(s[1], s[2]); } });
+    return res;
+  }
+  function fermer(box) {
+    var p = box.querySelector(".asst-panel"), b = box.querySelector(".asst-btn");
+    p.hidden = true; b.setAttribute("aria-expanded", "false");
+  }
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest(".asst-btn");
+    if (b) {
+      var box = b.closest(".asst"), p = box.querySelector(".asst-panel"), ouvert = p.hidden;
+      p.hidden = !ouvert; b.setAttribute("aria-expanded", ouvert ? "true" : "false");
+      if (ouvert) { var i = p.querySelector(".asst-q"); if (i) { try { i.focus(); } catch (x) {} } }
+      return;
+    }
+    var c = e.target.closest(".asst-close");
+    if (c) { fermer(c.closest(".asst")); return; }
+    var a = e.target.closest(".asst a");
+    if (a) { fermer(a.closest(".asst")); return; }
+    document.querySelectorAll(".asst").forEach(function (bx) { if (!bx.contains(e.target)) { fermer(bx); } });
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") { document.querySelectorAll(".asst").forEach(fermer); }
+  });
+  document.addEventListener("submit", function (e) {
+    var f = e.target.closest(".asst-form");
+    if (!f) { return; }
+    e.preventDefault();
+    var q = f.querySelector(".asst-q").value.trim(), out = f.parentNode.querySelector(".asst-out");
+    while (out.firstChild) { out.removeChild(out.firstChild); }
+    if (!q) { out.appendChild(el("p", "asst-msg", "Écrivez par exemple : nid de guêpes, rats à Laval, punaises de lit...")); return; }
+    var res = chercher(q);
+    if (!res.length) {
+      out.appendChild(el("p", "asst-msg", "Je n'ai pas trouvé de page précise pour cette demande. Le plus simple est de m'appeler ou de demander un devis gratuit."));
+    } else {
+      out.appendChild(el("p", "asst-msg", res.length > 1 ? "Voici les pages qui correspondent :" : "Voici la page qui correspond :"));
+      var ul = el("ul", "asst-res");
+      res.forEach(function (r) { var li = el("li"), a = el("a", "", r[0] + " →"); a.href = r[1]; li.appendChild(a); ul.appendChild(li); });
+      out.appendChild(ul);
+    }
+  });
+})();
