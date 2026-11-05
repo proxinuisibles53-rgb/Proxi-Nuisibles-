@@ -1,5 +1,14 @@
 # Journal des modifications
 
+## 2026-11-05 — Mise en ligne
+- Site en ligne sur https://www.proxinuisibles.fr via Cloudflare Pages,
+  relié à ce dépôt (branche `main`, dossier `public`).
+- Le domaine est enregistré chez OVH mais géré par Cloudflare
+  (serveurs de noms `augustus` et `jessica.ns.cloudflare.com`).
+- Reste à faire : redirection de l'adresse sans `www`, correction du double
+  enregistrement SPF, activation du formulaire FormSubmit, envoi du sitemap
+  dans la Search Console.
+
 ## 2026-11-05 (soir)
 - Vidéo de nid primaire en fond du haut de page sur « Frelons et guêpes ».
 - Photo du badigeon en fond du haut de page sur « Mouches » ; la miniature de
