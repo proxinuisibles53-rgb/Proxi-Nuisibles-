@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Mot-clé « dératiseur » : titre, titre de page (H1), description, introduction, un court passage et une question
+# Mot-clé « dératiseur » : titre Google, description, introduction, un court passage et une question
 # sur toutes les pages dératisation, plus les pages « publics » et la page d'accueil.
 # Exécuté en dernier (après mentions.py) : il retouche les pages déjà déclarées dans P.
 import re as _re
@@ -29,7 +29,6 @@ def _faq_debut(d, q, a):
 # ---------- 1. Page « Dératisation » ----------
 _d = P["/deratisation/"]
 _d["title"] = _fit(["Dératiseur et Dératisation Mayenne et 35 | Proxinuisibles", "Dératiseur Mayenne et Ille-et-Vilaine | Proxinuisibles"], 60)
-_d["h1"] = "Dératiseur en Mayenne et Ille-et-Vilaine : dératisation de rats et souris"
 _d["meta"] = _fit(["Dératiseur en Mayenne et Ille-et-Vilaine : dératisation de rats et souris dans les maisons, fermes et commerces. Diagnostic et devis gratuits.",
                    "Dératiseur en Mayenne et Ille-et-Vilaine : rats, souris, rongeurs. Diagnostic et devis gratuits."], 158)
 _d["lead"] = "Vous cherchez un dératiseur professionnel ? " + _d["lead"]
@@ -55,7 +54,6 @@ for _p, _d in P.items():
     if not _h:
         continue
     nom, dep = _h.group(1), _h.group(2)
-    _d["h1"] = _d["h1"].replace("Dératisation à ", "Dératiseur à ", 1)
     _d["title"] = _fit(["Dératiseur et Dératisation à %s (%s) | Proxinuisibles" % (nom, dep),
                         "Dératiseur et Dératisation %s | Proxinuisibles" % nom,
                         "Dératiseur à %s (%s) | Proxinuisibles" % (nom, dep),
@@ -81,22 +79,18 @@ for _p, _d in P.items():
 
 # ---------- 4. Pages « publics » ----------
 _d = P["/particuliers/"]
-_d["h1"] = "Dératiseur et anti-nuisibles pour particuliers en Mayenne et Ille-et-Vilaine"
 _d["title"] = _fit(["Dératiseur Particuliers Mayenne et 35 | Proxinuisibles", "Dératiseur Particuliers | Proxinuisibles"], 60)
 _d["lead"] = "Un dératiseur et anti-nuisibles à votre porte. " + _d["lead"]
 
 _d = P["/agriculteurs/"]
-_d["h1"] = "Dératiseur pour agriculteurs et éleveurs : dératisation et nuisibles"
 _d["title"] = _fit(["Dératiseur Agriculteurs et Éleveurs | Proxinuisibles"], 60)
 _d["lead"] = "Vous cherchez un dératiseur pour votre exploitation ? " + _d["lead"]
 
 _d = P["/professionnels/"]
-_d["h1"] = "Dératiseur et anti-nuisibles pour professionnels et collectivités : restaurants, commerces, mairies"
 _d["title"] = _fit(["Dératiseur Professionnels Laval | Proxinuisibles", "Dératiseur Professionnels | Proxinuisibles"], 60)
 _d["lead"] = "Vous cherchez un dératiseur pour votre établissement ? " + _d["lead"]
 
 _d = P["/agences-syndics/"]
-_d["h1"] = "Dératiseur et anti-nuisibles pour agences immobilières et syndics"
 _d["title"] = _fit(["Dératiseur Agences et Syndics | Proxinuisibles"], 60)
 _d["lead"] = "Un dératiseur pour vos logements et vos parties communes. " + _d["lead"]
 
@@ -104,13 +98,11 @@ _d = P["/contrat-annuel-deratisation/"]
 _d["title"] = _fit(["Dératiseur : Contrat Annuel Pro | Proxinuisibles", "Contrat Annuel Dératisation Pro | Proxinuisibles"], 60)
 
 _d = P["/qui-suis-je/"]
-_d["h1"] = "Qui suis-je ? Gwendal, dératiseur et spécialiste anti-nuisibles en Mayenne"
 _d["title"] = _fit(["Qui suis-je ? Gwendal, dératiseur | Proxinuisibles", "Qui suis-je ? | Anti-Nuisibles Mayenne | Proxinuisibles"], 60)
 _d["meta"] = _fit(["Gwendal, dératiseur à la tête de Proxinuisibles : dératisation, nids de frelons et désinsectisation en Mayenne et Ille-et-Vilaine."], 158)
 _d["lead"] = "Je suis dératiseur et je dirige Proxinuisibles depuis la Mayenne : j'interviens chez les particuliers, les agriculteurs et les professionnels."
 
 _d = P["/zones-intervention/"]
-_d["h1"] = "Zones d'intervention de votre dératiseur en Mayenne et Ille-et-Vilaine"
 _d["title"] = _fit(["Dératiseur Mayenne et 35 : zones d'intervention | Proxinuisibles", "Zones d'intervention Mayenne et 35 | Proxinuisibles"], 60)
 _d["lead"] = "Dératiseur, désinsectisation, frelons : j'interviens dans toute la Mayenne et en Ille-et-Vilaine, de Laval à Rennes."
 
@@ -123,7 +115,6 @@ _faq_debut(_d, "Que fait un dératiseur ?",
 
 # ---------- 5. Accueil ----------
 _d = P["/"]
-_d["h1"] = "Dératiseur, désinsectisation et nids de frelons à Laval, Vitré, et dans toute la Mayenne et l'Ille-et-Vilaine"
 _d["title"] = _fit(["Dératiseur, Dératisation, Désinsectisation | Proxinuisibles", "Dératiseur, Désinsectisation, Frelons | Proxinuisibles"], 60)
 _d["meta"] = _fit(["Dératiseur et anti-nuisibles en Mayenne et Ille-et-Vilaine : rats, insectes, frelons, guêpes, punaises de lit. Intervention rapide, devis gratuit."], 158)
 _d["lead"] = "Dératiseur professionnel : rats, souris, insectes, frelons, guêpes, punaises de lit. J'interviens chez les particuliers, les agriculteurs et les professionnels en Mayenne et en Ille-et-Vilaine. Devis gratuit."
