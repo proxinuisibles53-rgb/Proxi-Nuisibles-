@@ -482,12 +482,14 @@ TAGS = {"deratisation": "Rongeurs", "frelons-guepes": "Insectes volants", "desin
 MENU_SERVICES = ["deratisation", "desinsectisation", "frelons-guepes", "frelon-asiatique", "punaises-de-lit", "blattes-cafards",
                  "puces", "fourmis", "mouches", "chenilles-processionnaires", "taupier", "contrat-annuel-deratisation",
                  "depigeonnage", "piegeur-agree"]
+# Catégories principales, mises en avant dans le menu comme Débarras (orange + chevron).
+MENU_PRINCIPAUX = {"deratisation", "desinsectisation", "piegeur-agree"}
 _NOMS_MENU = dict([(s[0], s[1]) for s in SV] + [("contrat-annuel-deratisation", "Contrat annuel pro")])
 assert set(_NOMS_MENU) == set(MENU_SERVICES), "un service manque dans MENU_SERVICES"
 HEADER = ("<header class='top'><div class='wrap bar'><a class='logo' href='/'><img src='/logo-petit.webp' alt='' width='95' height='160'><img class='logo-txt' src='/logo-texte.webp' alt='Proxinuisibles, accueil' width='92' height='62'></a>"
   "<button class='burger' type='button' aria-label='Menu' aria-expanded='false'>\u2630</button>"
   "<nav id='nav'><ul><li><a href='/'>Accueil</a></li>"
-  "<li class='dd'><details><summary>Mes services</summary><ul>" + "".join("<li><a href='/%s/'>%s</a></li>" % (s, _NOMS_MENU[s]) for s in MENU_SERVICES) +
+  "<li class='dd'><details><summary>Mes services</summary><ul>" + "".join("<li><a%s href='/%s/'>%s</a></li>" % (" class='nav-deb'" if s in MENU_PRINCIPAUX else "", s, _NOMS_MENU[s]) for s in MENU_SERVICES) +
   "<li><a class='nav-deb' href='/debarras/'>Débarras</a></li></ul></details></li>"
   "<li><a href='/contact/'>Devis et contact</a></li><li><a href='/questions-frequentes/'>Questions fréquentes</a></li><li><a href='/qui-suis-je/'>Qui suis-je ?</a></li></ul></nav>"
   "<a class='btn' href='tel:%s'>\u260e %s</a></div></header>" % (TEL, TEL_D))

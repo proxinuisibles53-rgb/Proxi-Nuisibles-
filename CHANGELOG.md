@@ -1,6 +1,8 @@
 # Journal des modifications
 
 ## 2026-11-06
+- Menu « Mes services » : Dératisation, Désinsectisation et Piégeur agréé ressortent
+  en orange avec un chevron, comme Débarras.
 - Menu « Mes services » réordonné : Dératisation, Désinsectisation, les insectes,
   Taupier, Contrat annuel pro, puis Dépigeonnage, Piégeur agréé et Débarras.
   L'accueil et le pied de page gardent leur ordre.
