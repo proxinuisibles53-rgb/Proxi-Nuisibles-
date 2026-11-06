@@ -1,5 +1,11 @@
 # Journal des modifications
 
+## 2026-11-06 (soir)
+- Carte interactive sur « Zones d'intervention » : la Mayenne et l'Ille-et-Vilaine
+  colorées en entier, Port-Brillet comme point de départ. Leaflet 1.9.4 servi par
+  le site (`/leaflet/`), contours dans `assets/zone.geojson`
+  (source : github.com/gregoiredavid/france-geojson). Mentions légales complétées.
+
 ## 2026-11-06
 - Page « Dépigeonnage » : ajout du piégeage en cage (méthode, cadre, lien avec les
   protections) et de deux questions fréquentes.
