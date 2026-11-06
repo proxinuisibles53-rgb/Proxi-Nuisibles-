@@ -1,6 +1,8 @@
 # Journal des modifications
 
 ## 2026-11-06
+- Page « Dépigeonnage » : ajout du piégeage en cage (méthode, cadre, lien avec les
+  protections) et de deux questions fréquentes.
 - Menu « Mes services » : Dératisation, Désinsectisation et Piégeur agréé ressortent
   en orange avec un chevron, comme Débarras.
 - Menu « Mes services » réordonné : Dératisation, Désinsectisation, les insectes,
