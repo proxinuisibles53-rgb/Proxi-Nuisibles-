@@ -1,5 +1,10 @@
 # Journal des modifications
 
+## 2026-11-06
+- Bouton « Haut » en bas à gauche de l'écran : apparaît après 400 px de
+  défilement et ramène en haut de page. Il ne gêne pas la mascotte, qui reste
+  en bas à droite.
+
 ## 2026-11-05 — Mise en ligne
 - Formulaire de contact basculé de FormSubmit vers Web3Forms (pas d'activation
   à cliquer) ; mentions légales mises à jour en conséquence.
