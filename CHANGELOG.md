@@ -1,6 +1,9 @@
 # Journal des modifications
 
 ## 2026-11-06
+- Menu « Mes services » réordonné : Dératisation, Désinsectisation, les insectes,
+  Taupier, Contrat annuel pro, puis Dépigeonnage, Piégeur agréé et Débarras.
+  L'accueil et le pied de page gardent leur ordre.
 - Bouton « Haut » en bas à gauche de l'écran : apparaît après 400 px de
   défilement et ramène en haut de page. Il ne gêne pas la mascotte, qui reste
   en bas à droite.

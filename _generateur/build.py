@@ -478,11 +478,17 @@ def ico(path):
     return "<span class='ico' aria-hidden='true'><svg viewBox='0 0 48 48' xmlns='http://www.w3.org/2000/svg'>%s</svg></span>" % ICON_SVG[k]
 
 TAGS = {"deratisation": "Rongeurs", "frelons-guepes": "Insectes volants", "desinsectisation": "Autres insectes", "frelon-asiatique": "Espèce envahissante", "mouches": "Insectes volants", "puces": "Animaux et habitat", "blattes-cafards": "Insectes rampants", "fourmis": "Insectes rampants", "chenilles-processionnaires": "Arbres", "punaises-de-lit": "Habitat", "taupier": "Jardins et terrains", "depigeonnage": "Bâtiments", "piegeur-agree": "Faune sauvage"}
+# Ordre du menu déroulant « Mes services » (indépendant de l'ordre de SV, utilisé par l'accueil et le pied de page).
+MENU_SERVICES = ["deratisation", "desinsectisation", "frelons-guepes", "frelon-asiatique", "punaises-de-lit", "blattes-cafards",
+                 "puces", "fourmis", "mouches", "chenilles-processionnaires", "taupier", "contrat-annuel-deratisation",
+                 "depigeonnage", "piegeur-agree"]
+_NOMS_MENU = dict([(s[0], s[1]) for s in SV] + [("contrat-annuel-deratisation", "Contrat annuel pro")])
+assert set(_NOMS_MENU) == set(MENU_SERVICES), "un service manque dans MENU_SERVICES"
 HEADER = ("<header class='top'><div class='wrap bar'><a class='logo' href='/'><img src='/logo-petit.webp' alt='' width='95' height='160'><img class='logo-txt' src='/logo-texte.webp' alt='Proxinuisibles, accueil' width='92' height='62'></a>"
   "<button class='burger' type='button' aria-label='Menu' aria-expanded='false'>\u2630</button>"
   "<nav id='nav'><ul><li><a href='/'>Accueil</a></li>"
-  "<li class='dd'><details><summary>Mes services</summary><ul>" + "".join("<li><a href='/%s/'>%s</a></li>" % (s[0], s[1]) for s in SV) +
-  "<li><a class='nav-deb' href='/debarras/'>Débarras</a></li><li><a href='/contrat-annuel-deratisation/'>Contrat annuel pro</a></li></ul></details></li>"
+  "<li class='dd'><details><summary>Mes services</summary><ul>" + "".join("<li><a href='/%s/'>%s</a></li>" % (s, _NOMS_MENU[s]) for s in MENU_SERVICES) +
+  "<li><a class='nav-deb' href='/debarras/'>Débarras</a></li></ul></details></li>"
   "<li><a href='/contact/'>Devis et contact</a></li><li><a href='/questions-frequentes/'>Questions fréquentes</a></li><li><a href='/qui-suis-je/'>Qui suis-je ?</a></li></ul></nav>"
   "<a class='btn' href='tel:%s'>\u260e %s</a></div></header>" % (TEL, TEL_D))
 CTA = ("<section class='cta'><div class='wrap'><h2>Décrivez-moi ce que vous voyez. Je vous dirai comment avancer.</h2>"
