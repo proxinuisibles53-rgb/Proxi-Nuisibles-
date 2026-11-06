@@ -427,6 +427,7 @@ exec(open("/home/claude/extras600.py", encoding="utf-8").read())
 exec(open("/home/claude/debarras.py", encoding="utf-8").read())
 exec(open("/home/claude/punaises_villes.py", encoding="utf-8").read())
 exec(open("/home/claude/frelons_villes.py", encoding="utf-8").read())
+exec(open("/home/claude/services_villes.py", encoding="utf-8").read())
 exec(open("/home/claude/mentions.py", encoding="utf-8").read())
 
 # ---------- RENDU ----------
@@ -741,6 +742,8 @@ def crumbs(path, d, title):
     c = [("Accueil", "/")]
     if path == "/zones-intervention/" or d["kind"] in ("service",) or path in ("/contact/", "/qui-suis-je/", "/questions-frequentes/"):
         pass
+    elif d.get("parent"):
+        c.append(d["parent"])
     elif path.startswith("/contrat-deratisation-") and path != "/contrat-deratisation-annuel/":
         c.append(("Contrats métiers de bouche", "/contrats-metiers-de-bouche/"))
     elif path.startswith("/deratisation-") and path.endswith("-laval/") and path != "/deratisation-laval/":
@@ -765,7 +768,7 @@ def service_ld(path, d):
         stype = _SVC.get(path.strip("/"), d["h1"])
         area = None
     else:
-        stype = "Contrat de dératisation" if path.startswith("/contrat-deratisation-") else "Dératisation"
+        stype = d.get("stype") or ("Contrat de dératisation" if path.startswith("/contrat-deratisation-") else "Dératisation")
         area = _lieu(d)
     ld = {"@context": "https://schema.org", "@type": "Service", "name": d["h1"], "serviceType": stype, "url": BASE + path,
           "provider": {"@type": "LocalBusiness", "name": "Proxinuisibles", "url": BASE + "/", "telephone": TEL}}

@@ -34,6 +34,7 @@ Puis recopier le contenu de `_generateur/site/` dans `public/` et pousser.
 | `communes40_bouche.py` + `bouche40.json` | contrats boulangerie et boucherie dans un rayon de 40 km |
 | `punaises_villes.py` | pages « punaises de lit » par ville |
 | `frelons_villes.py` | pages « frelons et guêpes » par commune |
+| `services_villes.py` | pages « désinsectisation, chenilles, taupier, dépigeonnage, piégeur agréé » par commune |
 | `debarras.py` | section débarras (page principale + communes de l'axe Laval-Rennes) |
 | `extras600.py` | sections complémentaires pour atteindre 600 à 800 mots par page |
 | `mentions.py` | mentions EGalim, HACCP, méthodes, proofing, frise des contrats |

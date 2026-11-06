@@ -1,6 +1,10 @@
 # Journal des modifications
 
 ## 2026-11-06 (soir)
+- 50 pages « prestation + commune » (`_generateur/services_villes.py`) :
+  désinsectisation (12), chenilles processionnaires (10), taupier (10),
+  dépigeonnage (8), piégeur agréé (10). Liens depuis chaque page prestation et
+  depuis « Zones d'intervention » ; fil d'Ariane vers la prestation.
 - Carte interactive sur « Zones d'intervention » : la Mayenne et l'Ille-et-Vilaine
   colorées en entier, Port-Brillet comme point de départ. Leaflet 1.9.4 servi par
   le site (`/leaflet/`), contours dans `assets/zone.geojson`
