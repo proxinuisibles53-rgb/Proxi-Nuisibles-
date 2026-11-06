@@ -429,6 +429,7 @@ exec(open("/home/claude/punaises_villes.py", encoding="utf-8").read())
 exec(open("/home/claude/frelons_villes.py", encoding="utf-8").read())
 exec(open("/home/claude/services_villes.py", encoding="utf-8").read())
 exec(open("/home/claude/mentions.py", encoding="utf-8").read())
+exec(open("/home/claude/seo_deratiseur.py", encoding="utf-8").read())
 
 # ---------- RENDU ----------
 NAV = [("Dératisation", "/deratisation/"), ("Frelons et guêpes", "/frelons-guepes/"), ("Désinsectisation", "/desinsectisation/"), ("Professionnels", "/professionnels/"), ("Devis et contact", "/contact/")]
@@ -623,7 +624,7 @@ def home_page(path, d, title, meta, scripts):
     h.append("<section class='hero'><div class='wrap'><div><span class='label'>%s</span><h1>%s</h1><p>%s</p>"
              "<div class='actions'><a class='btn' href='tel:%s'>Appeler le %s</a><a class='btn btn-light' href='#services'>Découvrir mes services</a></div>"
              "<p class='facts'>%s</p></div></div></section>" %
-             (T("Désinsectisation et dératisation · Mayenne et Ille-et-Vilaine"), T(d["h1"]), T(d["lead"]), TEL, TEL_D, T("Mayenne et Ille-et-Vilaine · Particuliers, agriculteurs et professionnels · Diagnostic et devis gratuits")))
+             (T("Dératiseur et désinsectisation · Mayenne et Ille-et-Vilaine"), T(d["h1"]), T(d["lead"]), TEL, TEL_D, T("Mayenne et Ille-et-Vilaine · Particuliers, agriculteurs et professionnels · Diagnostic et devis gratuits")))
     h.append(profils_html())
     h.append("<section class='sec' id='toutes-prestations'><div class='wrap'><span class='label'>Toutes mes prestations</span><h2>Une réponse précise à chaque nuisible</h2><p>Vous savez déjà ce que vous cherchez ? Choisissez directement la prestation.</p><div class='grid'>%s</div></div></section>" % cards.replace("d'i", "d\u2019i"))
     h.append("<section class='sec alt'><div class='wrap'><span class='label'>Pourquoi me choisir</span><h2>Un interlocuteur, une méthode, un suivi</h2><div class='why'>"
@@ -780,7 +781,7 @@ def render(path, d):
     title, meta = T(d["title"]), T(d["meta"])
     ld = {"@context": "https://schema.org", "@type": "LocalBusiness", "name": "Proxinuisibles", "url": BASE + "/",
           "telephone": TEL, "email": MAIL,
-          "description": "Dératisation, destruction de nids de frelons et guêpes, désinsectisation en Mayenne et Ille-et-Vilaine.",
+          "description": "Dératiseur : dératisation, destruction de nids de frelons et guêpes, désinsectisation en Mayenne et Ille-et-Vilaine.",
           "areaServed": [c[1] for c in CITIES], "hasMap": FICHE,
           "address": {"@type": "PostalAddress", "streetAddress": "7 rue des Lavandières", "postalCode": "53410", "addressLocality": "Port-Brillet", "addressCountry": "FR"},
           "openingHoursSpecification": [

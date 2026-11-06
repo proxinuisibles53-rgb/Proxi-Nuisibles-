@@ -1,6 +1,11 @@
 # Journal des modifications
 
 ## 2026-11-06 (soir)
+- Mot-clé « dératiseur » (`_generateur/seo_deratiseur.py`) : titre, H1, description,
+  introduction, un court passage et une question « Que fait un dératiseur ? » sur les
+  59 pages « Dératisation + commune » et sur la page Dératisation ; titre, H1 et
+  introduction des pages particuliers, agriculteurs, professionnels, agences et syndics,
+  zones, contact, qui suis-je et accueil ; phrase d'introduction sur les pages contrats.
 - 50 pages « prestation + commune » (`_generateur/services_villes.py`) :
   désinsectisation (12), chenilles processionnaires (10), taupier (10),
   dépigeonnage (8), piégeur agréé (10). Liens depuis chaque page prestation et

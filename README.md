@@ -38,6 +38,7 @@ Puis recopier le contenu de `_generateur/site/` dans `public/` et pousser.
 | `debarras.py` | section débarras (page principale + communes de l'axe Laval-Rennes) |
 | `extras600.py` | sections complémentaires pour atteindre 600 à 800 mots par page |
 | `mentions.py` | mentions EGalim, HACCP, méthodes, proofing, frise des contrats |
+| `seo_deratiseur.py` | mot-clé « dératiseur » : titres, descriptions, introductions et questions des pages dératisation, publics et accueil (exécuté en dernier) |
 | `assets/` | logos, médias, assistant, avis Google |
 
 ## Avis Google
