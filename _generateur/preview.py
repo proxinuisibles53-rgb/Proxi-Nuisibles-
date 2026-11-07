@@ -7,7 +7,9 @@ for root, _, files in os.walk(S):
         path = "/" + os.path.relpath(root, S).replace(".", "") if root != S else "/"
         path = path if path == "/" else path.rstrip("/") + "/"
         html = open(os.path.join(root, "index.html"), encoding="utf-8").read()
-        m = re.search(r"<body>(.*?)<script src='/site.js'></script><script src='/avis.js'></script></body>", html, re.S)
+        m = re.search(r"<body>(.*?)(?:<script src='/[^']+'></script>)+</body>", html, re.S)
+        if not m:
+            m = re.search(r"<body>(.*?)</body>", html, re.S)
         t = re.search(r"<title>(.*?)</title>", html).group(1)
         pages[path] = (t, m.group(1))
 def uri(f, mime):
