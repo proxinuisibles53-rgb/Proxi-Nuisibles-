@@ -1,6 +1,8 @@
 # Journal des modifications
 
 ## 2026-11-07
+- Bouton de retour en haut refait : rond discret avec un anneau orange qui se
+  remplit selon la progression dans la page, placé au-dessus de la mascotte.
 - Fil d'Ariane repris sur les 317 pages : libellés courts (« Laval », « Boulangerie
   à Fougères ») au lieu des titres SEO tronqués, et niveau parent ajouté pour les
   pages punaises de lit, frelons, débarras, chenilles, dépigeonnage et taupier.
