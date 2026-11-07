@@ -1,5 +1,10 @@
 # Journal des modifications
 
+## 2026-11-07
+- Fil d'Ariane repris sur les 317 pages : libellés courts (« Laval », « Boulangerie
+  à Fougères ») au lieu des titres SEO tronqués, et niveau parent ajouté pour les
+  pages punaises de lit, frelons, débarras, chenilles, dépigeonnage et taupier.
+
 ## 2026-11-06 (soir)
 - Mot-clé « dératiseur » (`_generateur/seo_deratiseur.py`) : titre, H1, description,
   introduction, un court passage et une question « Que fait un dératiseur ? » sur les

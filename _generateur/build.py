@@ -738,20 +738,78 @@ def _lieu(d):
     m = re.search(r" à (.+?)(?: \(|:|,|$)", d["h1"])
     return m.group(1).strip() if m else None
 
+import re as _re_crumb
+# « ... à <Commune> (53) » : on s'arrête au premier séparateur pour ne pas avaler la phrase
+_RE_COMMUNE = _re_crumb.compile(r"à ([^à,:()]+?)\s*\(\d{2}\)")
+_RE_COMMUNE_FIN = _re_crumb.compile(r"à ([^à,:()]+?)\s*$")
+_METIERS = ("boulangerie-pâtisserie", "boucherie-charcuterie", "restauration collective",
+            "restauration d’entreprise", "restauration d'entreprise", "cuisine collective",
+            "cuisine centrale", "boulangerie", "boucherie", "restaurant", "traiteur")
+
+_CRUMB_FAM = (
+ ("/punaises-de-lit-", "Punaises de lit", "/punaises-de-lit/"),
+ ("/frelons-guepes-", "Frelons et guêpes", "/frelons-guepes/"),
+ ("/debarras-", "Débarras", "/debarras/"),
+ ("/contrats-metiers-de-bouche", None, None),
+ ("/contrat-deratisation-", "Contrats métiers de bouche", "/contrats-metiers-de-bouche/"),
+ ("/deratisation-", "Zones d'intervention", "/zones-intervention/"),
+)
+_CRUMB_NOM = {
+ "/contact/": "Devis et contact", "/zones-intervention/": "Zones d'intervention",
+ "/questions-frequentes/": "Questions fréquentes", "/qui-suis-je/": "Qui suis-je ?",
+ "/mentions-legales/": "Mentions légales", "/debarras/": "Débarras",
+ "/particuliers/": "Particuliers", "/professionnels/": "Professionnels",
+ "/agriculteurs/": "Agriculteurs et éleveurs", "/agences-syndics/": "Agences et syndics",
+ "/metiers-de-bouche/": "Métiers de bouche", "/contrats-metiers-de-bouche/": "Contrats métiers de bouche",
+ "/contrat-annuel-deratisation/": "Contrat annuel", "/piegeur-agree/": "Piégeur agréé",
+}
+
+def _crumb_commune(h1):
+    m = _RE_COMMUNE.findall(h1) or _RE_COMMUNE_FIN.findall(h1)
+    return m[-1].strip() if m else None
+
+def _crumb_metier(h1):
+    bas = h1.lower()
+    for mot in _METIERS:
+        if mot in bas:
+            return mot[0].upper() + mot[1:]
+    return None
+
+def _crumb_dernier(path, d, title):
+    """Libellé court du dernier maillon : jamais le titre SEO."""
+    if path in _CRUMB_NOM:
+        return _CRUMB_NOM[path]
+    if d.get("crumb"):
+        return d["crumb"]
+    if d.get("nav"):
+        return d["nav"]
+    h1 = d.get("h1", "")
+    com = _crumb_commune(h1)
+    if com:
+        if path.startswith("/contrat-deratisation-"):
+            met = _crumb_metier(h1)
+            return "%s à %s" % (met, com) if met else com
+        if path.startswith("/deratisation-") and path.endswith("-laval/"):
+            met = _crumb_metier(h1)
+            if met:
+                return met
+        return com
+    return title.split(" | ")[0]
+
 def crumbs(path, d, title):
-    last = title.split(" | ")[0]
     c = [("Accueil", "/")]
-    if path == "/zones-intervention/" or d["kind"] in ("service",) or path in ("/contact/", "/qui-suis-je/", "/questions-frequentes/"):
-        pass
-    elif d.get("parent"):
-        c.append(d["parent"])
-    elif path.startswith("/contrat-deratisation-") and path != "/contrat-deratisation-annuel/":
-        c.append(("Contrats métiers de bouche", "/contrats-metiers-de-bouche/"))
-    elif path.startswith("/deratisation-") and path.endswith("-laval/") and path != "/deratisation-laval/":
-        c.append(("Dératisation à Laval", "/deratisation-laval/"))
-    elif path.startswith("/deratisation-"):
-        c.append(("Zones d'intervention", "/zones-intervention/"))
-    c.append((last, path))
+    if path != "/":
+        if d.get("parent"):
+            c.append(d["parent"])
+        elif path.startswith("/deratisation-") and path.endswith("-laval/") and path != "/deratisation-laval/":
+            c.append(("Dératisation à Laval", "/deratisation-laval/"))
+        else:
+            for pref, lib, url in _CRUMB_FAM:
+                if path.startswith(pref) and path != url:
+                    if lib:
+                        c.append((lib, url))
+                    break
+    c.append((_crumb_dernier(path, d, title), path))
     return c
 
 def crumbs_html(cs):
