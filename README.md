@@ -47,6 +47,10 @@ Les avis affichés sur le site viennent de `_generateur/assets/avis.json`
 (note moyenne, nombre total, et les avis repris de la fiche Google).
 Ils sont intégrés au fichier `avis.js` lors de la génération.
 
+Les avis ont leur page dédiée, `/avis/`, accessible depuis le menu.
+La page d'accueil n'affiche qu'un bandeau compact (note, nombre, date)
+renvoyant vers cette page ; les autres pages n'affichent plus d'encart.
+
 ### Compteur en direct
 
 La note et le nombre d'avis sont rafraîchis depuis la fiche Google

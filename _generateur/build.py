@@ -454,7 +454,7 @@ FOOT = ("<footer class='foot'><div class='wrap'><div class='fgrid'>" +
         foot_col("Services", [(s[1], "/%s/" % s[0]) for s in SV] + [("Débarras", "/debarras/")]) +
         foot_col("Zones", [("Dératisation " + c[1], "/deratisation-%s/" % c[0]) for c in CITIES] + [("Dératisation " + f[1], "/deratisation-%s/" % f[0]) for f in FICHES if f[0] in ("saint-pierre-la-cour", "loiron-ruille", "le-genest-saint-isle", "cosse-le-vivien", "etrelles", "olivet")] + [("Toutes les communes", "/zones-intervention/")]) +
         foot_col("Professionnels", [("Restaurant", "/deratisation-restaurant-laval/"), ("Boulangerie", "/deratisation-boulangerie-laval/"), ("Boucherie", "/deratisation-boucherie-laval/"), ("Traiteur", "/deratisation-traiteur-laval/"), ("Cuisine collective", "/deratisation-cuisine-collective-laval/"), ("Contrat annuel", "/contrat-annuel-deratisation/"), ("Contrats métiers de bouche", "/contrats-metiers-de-bouche/"), ("Agences et syndics", "/agences-syndics/")]) +
-        foot_col("Proxinuisibles", [("Zones d'intervention", "/zones-intervention/"), ("Questions fréquentes", "/questions-frequentes/"), ("Particuliers", "/particuliers/"), ("Agriculteurs", "/agriculteurs/"), ("Devis gratuit", "/contact/"), ("Qui suis-je ?", "/qui-suis-je/"), ("Mentions légales", "/mentions-legales/")]) +
+        foot_col("Proxinuisibles", [("Zones d'intervention", "/zones-intervention/"), ("Avis clients", "/avis/"), ("Questions fréquentes", "/questions-frequentes/"), ("Particuliers", "/particuliers/"), ("Agriculteurs", "/agriculteurs/"), ("Devis gratuit", "/contact/"), ("Qui suis-je ?", "/qui-suis-je/"), ("Mentions légales", "/mentions-legales/")]) +
         "</div><p class='small'>© 2026 Proxinuisibles - SIRET 98424277600016 - Port-Brillet, Mayenne - <a href='tel:%s'>%s</a> - Certibiocide n° 059860 (<a href='https://certibiocide.din.developpement-durable.gouv.fr/verifCertificat' target='_blank' rel='noopener'>vérifier</a>)</p></div></footer>" % (TEL, TEL_D))
 
 ASST_HTML = ("<div class='asst'><button type='button' class='asst-btn' aria-expanded='false' aria-label='Poser une question ou me contacter'>"
@@ -473,8 +473,30 @@ TOP_HTML = ("<button type='button' class='toplink' id='toplink' aria-label='Reve
             "<svg class='tl-arrow' viewBox='0 0 24 24' aria-hidden='true'><path d='M12 6.5l6.5 7.2h-4.1v5.8h-4.8v-5.8H5.5z'/></svg>"
             "</button>")
 FOOT = FOOT + ASST_HTML + TOP_HTML
-AVIS = ("<section class='sec alt' id='avis' hidden><div class='wrap'><span class='label'>La parole à mes clients</span><h2>Ce que disent mes clients sur Google</h2><p>Mes clients laissent leurs avis sur ma fiche Google. Vous pouvez les consulter directement.</p><div id='avis-widget'></div><p><a id='avis-fiche' class='btn' href='#' hidden>Voir tous mes avis sur Google</a></p>"
+AVIS_MINI = ("<section class='sec alt' id='avis-mini' hidden><div class='wrap'><span class='label'>La parole à mes clients</span>"
+             "<h2>Ce que disent mes clients sur Google</h2><div id='avis-widget-mini'></div>"
+             "<p><a class='btn' href='/avis/'>Lire les avis de mes clients \u2197</a></p></div></section>")
+AVIS = ("<section class='sec alt' id='avis' hidden><div class='wrap'><span class='label'>En direct de ma fiche</span><h2>Ma note aujourd'hui</h2><div id='avis-widget'></div><p><a id='avis-fiche' class='btn' href='#' hidden>Voir tous mes avis sur Google</a></p>"
         "<p><a id='avis-lien' class='btn btn-ghost' href='#' hidden>Laisser un avis sur Google</a></p></div></section>")
+
+add("/avis/", h1="Les avis de mes clients sur Google",
+    title="Avis clients | Proxinuisibles",
+    meta="Les avis laissés par mes clients sur ma fiche Google, affichés tels quels : note, nombre d'avis et commentaires. Mayenne et Ille-et-Vilaine.",
+    lead="Mes clients laissent leurs avis sur ma fiche Google. Ils sont repris ici tels quels, sans tri de ma part.",
+    pre=AVIS,
+    secs=[("Pourquoi mes avis sont sur Google et pas ailleurs",
+           "Un avis déposé sur Google est rattaché à un compte Google, visible publiquement, et je ne peux ni le supprimer ni le modifier. C'est ce qui lui donne sa valeur.\nLa note et le nombre d'avis affichés en haut de cette page sont lus directement sur ma fiche, une fois par jour. Je ne les saisis pas à la main : ce que vous voyez est ce que dit Google au moment où vous lisez."),
+          ("Laisser un avis après une intervention",
+           "Si je suis intervenu chez vous, un avis m'aide bien plus que n'importe quelle publicité : c'est souvent la première chose que regarde la personne qui hésite à appeler.\nQuelques mots suffisent. Dire ce pour quoi je suis venu, si le problème est réglé et comment ça s'est passé est plus utile qu'un long texte.\nEt si quelque chose ne va pas, appelez-moi avant d'écrire : je préfère régler le problème que lire qu'il existait."),
+          ("Ce que je ne fais pas",
+           "- Je n'achète pas d'avis et je n'en fais pas rédiger\n- Je ne propose aucune remise en échange d'un avis\n- Je ne masque pas les avis qui me déplaisent, je n'en ai pas le pouvoir\n- Je ne reprends ici aucun avis qui ne viendrait pas de ma fiche Google")],
+    faq=[("Les avis affichés sur ce site sont-ils vérifiés ?",
+          "Ils proviennent de ma fiche Google Business Profile, où chaque avis est rattaché à un compte Google. La note et le nombre affichés sont relus automatiquement sur cette fiche une fois par jour."),
+         ("Puis-je laisser un avis si vous êtes intervenu il y a longtemps ?",
+          "Oui, Google n'impose aucun délai. Un avis déposé plusieurs mois après l'intervention compte autant qu'un autre."),
+         ("Je ne suis pas satisfait, que faire ?",
+          "Appelez-moi au " + TEL_D + ". Si une intervention n'a pas donné le résultat attendu, je préfère revenir voir sur place plutôt que de laisser la situation en l'état.")],
+    kind="info")
 
 ICON_SVG = {
  "frelon-asiatique": '<ellipse cx="24" cy="30" rx="7" ry="11"/><path d="M24 22v18" stroke-width="0"/><circle cx="24" cy="15" r="4.5"/><path class="a" d="M20 11l-4-6M28 11l4-6"/><path d="M17 20C9 14 4 18 5 24c1 5 7 5 12 2M31 20c8-6 13-2 12 4-1 5-7 5-12 2"/><path d="M17 36l-6 5M31 36l6 5"/>',
@@ -511,7 +533,7 @@ HEADER = ("<header class='top'><div class='wrap bar'><a class='logo' href='/'><i
   "<nav id='nav'><ul><li><a href='/'>Accueil</a></li>"
   "<li class='dd'><details><summary>Mes services</summary><ul>" + "".join("<li><a%s href='/%s/'>%s</a></li>" % (" class='nav-deb'" if s in MENU_PRINCIPAUX else "", s, _NOMS_MENU[s]) for s in MENU_SERVICES) +
   "<li><a class='nav-deb' href='/debarras/'>Débarras</a></li></ul></details></li>"
-  "<li><a href='/contact/'>Devis et contact</a></li><li><a href='/questions-frequentes/'>Questions fréquentes</a></li><li><a href='/qui-suis-je/'>Qui suis-je ?</a></li></ul></nav>"
+  "<li><a href='/contact/'>Devis et contact</a></li><li><a href='/avis/'>Avis</a></li><li><a href='/questions-frequentes/'>Questions fréquentes</a></li><li><a href='/qui-suis-je/'>Qui suis-je ?</a></li></ul></nav>"
   "<a class='btn' href='tel:%s'>\u260e %s</a></div></header>" % (TEL, TEL_D))
 CTA = ("<section class='cta'><div class='wrap'><h2>Décrivez-moi ce que vous voyez. Je vous dirai comment avancer.</h2>"
        "<p>Un nid, des traces, des bruits dans les combles ? Appelez-moi directement.</p>"
@@ -661,7 +683,7 @@ def home_page(path, d, title, meta, scripts):
              "<span class='soc-ico' aria-hidden='true'><svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><rect x='2.5' y='2.5' width='19' height='19' rx='5.5' fill='none' stroke='currentColor' stroke-width='2'/><circle cx='12' cy='12' r='4.2' fill='none' stroke='currentColor' stroke-width='2'/><circle cx='17.4' cy='6.6' r='1.4'/></svg></span>"
              "<span class='soc-txt'><strong>Instagram</strong><span>Photos et vid\u00e9os de nids, de pi\u00e8ges et de chantiers, prises sur le terrain.</span><span class='more'>Voir mon compte \u2197</span></span></a>"
              "</div></div></section>")
-    h.append(AVIS)
+    h.append(AVIS_MINI)
     h.append("<section class='sec'><div class='wrap'><div class='band'><span class='label'>Pour les professionnels</span><h2>Qui surveille votre établissement entre deux infestations ?</h2>"
              "<p>%s</p><a class='btn' href='/contrat-annuel-deratisation/'>Découvrir le contrat annuel \u2197</a></div></div></section>" %
              T("Restaurant, boulangerie, commerce, entrepôt ou bâtiment public : je mets en place un contrat annuel adapté à votre site, avec des passages réguliers et un compte rendu écrit."))
@@ -759,6 +781,7 @@ _CRUMB_FAM = (
 _CRUMB_NOM = {
  "/contact/": "Devis et contact", "/zones-intervention/": "Zones d'intervention",
  "/questions-frequentes/": "Questions fréquentes", "/qui-suis-je/": "Qui suis-je ?",
+ "/avis/": "Avis clients",
  "/mentions-legales/": "Mentions légales", "/debarras/": "Débarras",
  "/particuliers/": "Particuliers", "/professionnels/": "Professionnels",
  "/agriculteurs/": "Agriculteurs et éleveurs", "/agences-syndics/": "Agences et syndics",
@@ -877,7 +900,7 @@ def render(path, d):
         h.append("<section class='sec'><div class='wrap'><h2>%s</h2><ul class='chips'>%s</ul></div></section>" % (T(t), "".join("<li><a href='%s'>%s</a></li>" % (u, T(l)) for l, u in items)))
     if d["faq"]:
         h.append("<section class='sec alt'><div class='wrap'><h2>Questions fréquentes</h2>%s</div></section>" % "".join("<details><summary>%s</summary><p>%s</p></details>" % (T(q), T(a)) for q, a in d["faq"]))
-    if d["kind"] in ("home", "ville", "contact", "service"):
+    if d.get("avis"):
         h.append(AVIS)
     if d["kind"] != "legal":
         h.append(CTA)
@@ -907,7 +930,7 @@ p,ul{max-width:70ch;margin:0 0 1em}
 .btn{display:inline-block;padding:12px 24px;border-radius:8px;background:var(--orange);color:#000;font-weight:700;text-decoration:none;border:2px solid var(--orange)}
 .btn:hover{filter:brightness(.95)}
 .btn-ghost{background:transparent;border-color:var(--olive)}
-.avis-resume{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:18px 0}.avis-note{font-size:1.6rem}.avis-etoiles{color:var(--orange);letter-spacing:2px;font-size:1.15rem}.avis-nb{opacity:.8}.avis-ban{overflow:hidden;margin:0 0 22px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}.avis-piste{display:flex;gap:16px;width:max-content;animation:avis-defile var(--dur,70s) linear infinite}.avis-ban:hover .avis-piste,.avis-ban:focus-within .avis-piste{animation-play-state:paused}.avis-ban .avis-carte{flex:none;width:340px;white-space:normal}@keyframes avis-defile{from{transform:translateX(0)}to{transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){.avis-ban{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.avis-piste{animation:none}.avis-piste [aria-hidden=true]{display:none}}@media(max-width:700px){.avis-ban .avis-carte{width:280px}}.avis-carte{background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:10px;padding:16px 18px;margin:0}.avis-carte p{margin:8px 0}.avis-auteur{font-size:.9rem;opacity:.75}\n.choixgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:16px;margin:22px 0 14px}.choix{display:flex;flex-direction:column;gap:6px;padding:26px 24px;border-radius:14px;background:var(--dark);color:#fff;text-decoration:none;border:2px solid var(--dark);transition:transform .15s,border-color .15s}.choix:hover,.choix:focus-visible{transform:translateY(-3px);border-color:var(--orange)}.choix h3{margin:0;color:var(--orange);font-size:1.45rem}.choix p{margin:0;opacity:.92}.choix h3 a{color:var(--orange);text-decoration:none}.choix ul{list-style:none;margin:6px 0 4px;padding:0}.choix li{padding:7px 0;border-top:1px solid rgba(255,255,255,.16)}.choix li:first-child{border-top:0}.choix li a{color:#fff;text-decoration:none}.choix li a:hover,.choix li a:focus-visible{color:var(--orange);text-decoration:underline}.choix .more{color:var(--orange)}\n.choix-tag{font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;opacity:.75}.choix .more{margin-top:auto;padding-top:10px;font-weight:700}.choix-agence{margin:6px 0 0}\n.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0 8px}.pcard{display:block;padding:18px 20px;border-radius:12px;background:#fff;border:1px solid rgba(0,0,0,.14);color:inherit;text-decoration:none}.pcard:hover{border-color:var(--orange)}.pcard h3{margin:0 0 6px;font-size:1.1rem;color:var(--olive)}.pcard p{margin:0 0 8px;font-size:.95rem}.pcard .more{font-weight:700}.switch{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;padding:0;list-style:none}.switch a{display:inline-block;padding:8px 16px;border-radius:99px;border:2px solid var(--olive);text-decoration:none;color:inherit;font-weight:600}.switch a[aria-current]{background:var(--olive);color:#fff}\n.asst{position:fixed;right:16px;bottom:16px;z-index:50;font:inherit}.asst-btn{display:flex;align-items:flex-end;gap:2px;padding:0;border:0;background:transparent;color:var(--dark);cursor:pointer}.asst-btn img{width:100px;height:auto;display:block;filter:drop-shadow(0 4px 8px rgba(0,0,0,.35));transition:transform .2s}.asst-bulle{position:relative;max-width:190px;margin-bottom:72px;padding:11px 15px;background:#fff;color:var(--dark);border:2px solid var(--dark);border-radius:18px;text-align:left;font-size:1rem;line-height:1.3;box-shadow:0 4px 14px rgba(0,0,0,.25);animation:asst-pop 2.6s ease-in-out infinite}.asst-bulle b{color:var(--orange);-webkit-text-stroke:.3px var(--dark)}.asst-bulle::after{content:'';position:absolute;right:-9px;bottom:14px;width:14px;height:14px;background:#fff;border-right:2px solid var(--dark);border-top:2px solid var(--dark);transform:rotate(45deg)}.asst-btn:hover img,.asst-btn:focus-visible img{transform:scale(1.05)}.asst-btn:focus-visible{outline:3px solid var(--orange);outline-offset:4px;border-radius:12px}@keyframes asst-pop{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}@media(prefers-reduced-motion:reduce){.asst-bulle{animation:none}}.asst-btn[aria-expanded=true] .asst-bulle{display:none}.asst-panel{position:absolute;right:0;bottom:calc(100% + 10px);width:min(360px,calc(100vw - 32px));max-height:min(78vh,620px);overflow:auto;background:#fff;color:var(--dark);border:2px solid var(--dark);border-radius:14px;padding:16px;box-shadow:0 8px 28px rgba(0,0,0,.35)}.asst-head{display:flex;justify-content:space-between;align-items:center;gap:8px}.asst-close{border:0;background:transparent;font-size:1.6rem;line-height:1;cursor:pointer;color:inherit}.asst-msg{margin:10px 0}.asst-form{display:flex;gap:8px;margin:8px 0}.asst-q{flex:1;min-width:0;padding:10px;border:2px solid var(--olive);border-radius:8px;font:inherit}.asst-form .btn{width:auto;padding:10px 14px}.asst-res,.asst-quick{list-style:none;margin:6px 0;padding:0}.asst-res li,.asst-quick li{margin:4px 0}.asst-res a{display:block;padding:9px 12px;border-radius:8px;background:var(--soft);color:inherit;font-weight:700;text-decoration:none}.asst-res a:hover{outline:2px solid var(--orange)}.asst-sub{margin:12px 0 4px;font-weight:700}.asst-quick{display:flex;flex-wrap:wrap;gap:6px}.asst-quick a{display:inline-block;padding:6px 12px;border-radius:99px;border:2px solid var(--olive);color:inherit;text-decoration:none;font-size:.92rem}.asst-quick a:hover{background:var(--olive);color:#fff}.asst-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.asst-act .btn{width:auto;flex:1;text-align:center;padding:10px 12px}@media(max-width:700px){.asst{right:8px;bottom:8px}.asst-btn img{width:68px}.asst-bulle{max-width:140px;margin-bottom:46px;padding:8px 11px;font-size:.85rem}.asst-act .btn,.asst-form .btn{width:auto}}
+.avis-resume{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:18px 0}.avis-note{font-size:1.6rem}.avis-etoiles{color:var(--orange);letter-spacing:2px;font-size:1.15rem}.avis-nb{opacity:.8}.avis-maj{font-size:.85rem;opacity:.7;font-style:italic;flex-basis:100%}.avis-ban{overflow:hidden;margin:0 0 22px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent)}.avis-piste{display:flex;gap:16px;width:max-content;animation:avis-defile var(--dur,70s) linear infinite}.avis-ban:hover .avis-piste,.avis-ban:focus-within .avis-piste{animation-play-state:paused}.avis-ban .avis-carte{flex:none;width:340px;white-space:normal}@keyframes avis-defile{from{transform:translateX(0)}to{transform:translateX(-50%)}}@media(prefers-reduced-motion:reduce){.avis-ban{overflow-x:auto;-webkit-mask-image:none;mask-image:none}.avis-piste{animation:none}.avis-piste [aria-hidden=true]{display:none}}@media(max-width:700px){.avis-ban .avis-carte{width:280px}}.avis-carte{background:#fff;border:1px solid rgba(0,0,0,.12);border-radius:10px;padding:16px 18px;margin:0}.avis-carte p{margin:8px 0}.avis-auteur{font-size:.9rem;opacity:.75}\n.choixgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:16px;margin:22px 0 14px}.choix{display:flex;flex-direction:column;gap:6px;padding:26px 24px;border-radius:14px;background:var(--dark);color:#fff;text-decoration:none;border:2px solid var(--dark);transition:transform .15s,border-color .15s}.choix:hover,.choix:focus-visible{transform:translateY(-3px);border-color:var(--orange)}.choix h3{margin:0;color:var(--orange);font-size:1.45rem}.choix p{margin:0;opacity:.92}.choix h3 a{color:var(--orange);text-decoration:none}.choix ul{list-style:none;margin:6px 0 4px;padding:0}.choix li{padding:7px 0;border-top:1px solid rgba(255,255,255,.16)}.choix li:first-child{border-top:0}.choix li a{color:#fff;text-decoration:none}.choix li a:hover,.choix li a:focus-visible{color:var(--orange);text-decoration:underline}.choix .more{color:var(--orange)}\n.choix-tag{font-size:.85rem;letter-spacing:.04em;text-transform:uppercase;opacity:.75}.choix .more{margin-top:auto;padding-top:10px;font-weight:700}.choix-agence{margin:6px 0 0}\n.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0 8px}.pcard{display:block;padding:18px 20px;border-radius:12px;background:#fff;border:1px solid rgba(0,0,0,.14);color:inherit;text-decoration:none}.pcard:hover{border-color:var(--orange)}.pcard h3{margin:0 0 6px;font-size:1.1rem;color:var(--olive)}.pcard p{margin:0 0 8px;font-size:.95rem}.pcard .more{font-weight:700}.switch{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px;padding:0;list-style:none}.switch a{display:inline-block;padding:8px 16px;border-radius:99px;border:2px solid var(--olive);text-decoration:none;color:inherit;font-weight:600}.switch a[aria-current]{background:var(--olive);color:#fff}\n.asst{position:fixed;right:16px;bottom:16px;z-index:50;font:inherit}.asst-btn{display:flex;align-items:flex-end;gap:2px;padding:0;border:0;background:transparent;color:var(--dark);cursor:pointer}.asst-btn img{width:100px;height:auto;display:block;filter:drop-shadow(0 4px 8px rgba(0,0,0,.35));transition:transform .2s}.asst-bulle{position:relative;max-width:190px;margin-bottom:72px;padding:11px 15px;background:#fff;color:var(--dark);border:2px solid var(--dark);border-radius:18px;text-align:left;font-size:1rem;line-height:1.3;box-shadow:0 4px 14px rgba(0,0,0,.25);animation:asst-pop 2.6s ease-in-out infinite}.asst-bulle b{color:var(--orange);-webkit-text-stroke:.3px var(--dark)}.asst-bulle::after{content:'';position:absolute;right:-9px;bottom:14px;width:14px;height:14px;background:#fff;border-right:2px solid var(--dark);border-top:2px solid var(--dark);transform:rotate(45deg)}.asst-btn:hover img,.asst-btn:focus-visible img{transform:scale(1.05)}.asst-btn:focus-visible{outline:3px solid var(--orange);outline-offset:4px;border-radius:12px}@keyframes asst-pop{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}@media(prefers-reduced-motion:reduce){.asst-bulle{animation:none}}.asst-btn[aria-expanded=true] .asst-bulle{display:none}.asst-panel{position:absolute;right:0;bottom:calc(100% + 10px);width:min(360px,calc(100vw - 32px));max-height:min(78vh,620px);overflow:auto;background:#fff;color:var(--dark);border:2px solid var(--dark);border-radius:14px;padding:16px;box-shadow:0 8px 28px rgba(0,0,0,.35)}.asst-head{display:flex;justify-content:space-between;align-items:center;gap:8px}.asst-close{border:0;background:transparent;font-size:1.6rem;line-height:1;cursor:pointer;color:inherit}.asst-msg{margin:10px 0}.asst-form{display:flex;gap:8px;margin:8px 0}.asst-q{flex:1;min-width:0;padding:10px;border:2px solid var(--olive);border-radius:8px;font:inherit}.asst-form .btn{width:auto;padding:10px 14px}.asst-res,.asst-quick{list-style:none;margin:6px 0;padding:0}.asst-res li,.asst-quick li{margin:4px 0}.asst-res a{display:block;padding:9px 12px;border-radius:8px;background:var(--soft);color:inherit;font-weight:700;text-decoration:none}.asst-res a:hover{outline:2px solid var(--orange)}.asst-sub{margin:12px 0 4px;font-weight:700}.asst-quick{display:flex;flex-wrap:wrap;gap:6px}.asst-quick a{display:inline-block;padding:6px 12px;border-radius:99px;border:2px solid var(--olive);color:inherit;text-decoration:none;font-size:.92rem}.asst-quick a:hover{background:var(--olive);color:#fff}.asst-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.asst-act .btn{width:auto;flex:1;text-align:center;padding:10px 12px}@media(max-width:700px){.asst{right:8px;bottom:8px}.asst-btn img{width:68px}.asst-bulle{max-width:140px;margin-bottom:46px;padding:8px 11px;font-size:.85rem}.asst-act .btn,.asst-form .btn{width:auto}}
 .badges{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}.badges li{padding:7px 14px;border-radius:99px;background:var(--soft);border:2px solid var(--olive);font-weight:700;font-size:.95rem}\n.frise{list-style:none;margin:28px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;counter-reset:f}.frise::before{content:'';position:absolute;left:10%;right:10%;top:27px;height:4px;background:var(--olive);opacity:.35}.frise li{position:relative;text-align:center;padding:0 10px}.frise .n{display:flex;align-items:center;justify-content:center;width:56px;height:56px;margin:0 auto 12px;border-radius:50%;background:var(--orange,#ff8a1f);color:#fff;font-weight:800;font-size:1.25rem;border:4px solid #fff;box-shadow:0 0 0 3px var(--olive);position:relative}.frise strong{display:block;font-size:1.05rem;margin-bottom:4px}.frise em{display:block;font-style:normal;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;opacity:.7;margin-bottom:6px}.frise span.t{display:block;font-size:.92rem;line-height:1.45}
 @media(max-width:800px){.frise{grid-template-columns:1fr;gap:20px}.frise::before{left:27px;right:auto;top:0;bottom:0;width:4px;height:auto}.frise li{text-align:left;padding:0 0 0 76px;min-height:56px}.frise .n{position:absolute;left:0;top:0;margin:0}}\n.exp{display:flex;gap:32px;align-items:center}.exp img{width:160px;height:160px;border-radius:50%;flex:none;border:3px solid #fff}@media(max-width:700px){.exp{flex-direction:column;align-items:flex-start}.exp img{width:120px;height:120px}}\n.cform{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px}.cform label{display:flex;flex-direction:column;gap:6px;font-weight:700;font-size:.95rem}.cform .full{grid-column:1/-1}.cform input,.cform textarea{font:inherit;font-weight:400;padding:12px 14px;border:2px solid var(--olive);border-radius:10px;background:#fff;color:inherit}.cform input:focus,.cform textarea:focus{outline:3px solid var(--orange);outline-offset:1px}.cform textarea{min-height:150px;resize:vertical}.cform .rgpd{font-size:.85rem;font-weight:400;opacity:.8}.cform .hp{position:absolute;left:-9999px;opacity:0}.cform-msg{grid-column:1/-1;padding:14px 16px;border-radius:10px;font-weight:700}.cform-msg.ok{background:#e8f3e1;border:2px solid #5b8a3c}.cform-msg.ko{background:#fdeaea;border:2px solid #b94a48}@media(max-width:700px){.cform{grid-template-columns:1fr}}\n.faits{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:18px}.faits li{border-left:4px solid var(--orange);padding:4px 0 4px 16px}.faits strong{display:block;font-size:1.25rem;color:var(--olive)}.faits span{display:block;font-size:.92rem;opacity:.85;margin-top:3px}\n.socgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}.soc{display:flex;gap:16px;align-items:flex-start;padding:22px;border-radius:14px;background:#fff;border:2px solid rgba(0,0,0,.12);text-decoration:none;color:inherit;transition:transform .15s,border-color .15s}.soc:hover,.soc:focus-visible{transform:translateY(-3px);border-color:var(--orange)}.soc-ico{flex:none;width:46px;height:46px;border-radius:12px;background:var(--dark);color:#fff;display:flex;align-items:center;justify-content:center}.soc-ico svg{width:26px;height:26px;fill:currentColor}.soc-txt strong{display:block;font-size:1.1rem;margin-bottom:4px}.soc-txt span{display:block;font-size:.93rem;line-height:1.45}.soc .more{margin-top:8px;font-weight:700;color:var(--olive)}@media(max-width:700px){.socgrid{grid-template-columns:1fr}}\n.gal{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:22px 0 0}.gal figure{margin:0}.gal img{width:100%;height:auto;display:block;border-radius:14px;border:3px solid var(--orange)}.gal figcaption{font-size:.9rem;opacity:.8;margin-top:8px}@media(max-width:700px){.gal{grid-template-columns:1fr}}\n.bio-avert{font-size:.82rem;opacity:.75;margin-top:18px;font-style:italic}\n.band .mini{float:right;width:190px;margin:0 0 16px 26px}.band .mini img{width:100%;height:auto;display:block;border-radius:12px;border:3px solid var(--orange)}.band .mini figcaption{font-size:.8rem;opacity:.8;margin-top:8px;line-height:1.4}@media(max-width:700px){.band .mini{float:none;width:100%;max-width:260px;margin:0 0 18px}}\n.top nav .nav-deb{color:var(--orange);font-weight:800}.top nav .nav-deb::before{content:'\u25B8 ';opacity:.8}.top nav .nav-deb:hover,.top nav .nav-deb:focus-visible{color:var(--orange);text-decoration:underline}\n.foot .nav-deb{color:var(--orange);font-weight:800}\n.toplink{position:fixed;right:22px;bottom:192px;z-index:50;width:50px;height:50px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);cursor:pointer;display:grid;place-items:center;box-shadow:0 4px 16px rgba(0,0,0,.22);opacity:0;transform:translateY(12px) scale(.9);transition:opacity .22s,transform .22s,background .15s,box-shadow .15s}.toplink.on{opacity:1;transform:none}.toplink>*{grid-area:1/1}.tl-ring{width:50px;height:50px;transform:rotate(-90deg)}.tl-ring circle{fill:none;stroke-width:3}.tl-bg{stroke:rgba(0,0,0,.1)}.tl-pg{stroke:var(--orange);stroke-linecap:round;stroke-dasharray:125.6;stroke-dashoffset:125.6;transition:stroke-dashoffset .1s linear}.tl-arrow{width:21px;height:21px;fill:var(--dark);transition:fill .15s,transform .15s}.toplink:hover,.toplink:focus-visible{background:var(--orange);box-shadow:0 6px 20px rgba(0,0,0,.3)}.toplink:hover .tl-arrow,.toplink:focus-visible .tl-arrow{fill:#fff;transform:translateY(-2px)}.toplink:hover .tl-bg,.toplink:focus-visible .tl-bg{stroke:rgba(255,255,255,.35)}.toplink:hover .tl-pg,.toplink:focus-visible .tl-pg{stroke:#fff}@media(max-width:700px){.toplink{right:14px;bottom:152px;width:44px;height:44px}.tl-ring{width:44px;height:44px}.tl-arrow{width:18px;height:18px}}@media(prefers-reduced-motion:reduce){.toplink,.tl-pg,.tl-arrow{transition:none}}\n.crumbs{margin:0 0 14px;font-size:.9rem}.crumbs ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 0}.crumbs li+li::before{content:'\\203A';margin:0 8px;opacity:.7}.crumbs a{color:#fff;text-decoration:underline}.crumbs li[aria-current]{opacity:.85}\n.btn-light{background:transparent;border-color:#fff;color:#fff}\n.carte{height:520px;margin-top:20px;border-radius:14px;border:3px solid var(--olive);background:#e9ecdf;z-index:0}.carte-note{font-size:.8rem;opacity:.75;margin-top:8px}.carte .leaflet-popup-content{font:inherit;font-size:.95rem}.carte .leaflet-popup-content a{color:var(--olive);font-weight:700}@media(max-width:700px){.carte{height:380px}}
 .btn:focus-visible,summary:focus-visible,a:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
@@ -1013,37 +1036,50 @@ CSS += """
 """
 
 AVIS_JS = """/* AVIS GOOGLE
-   1) Vos avis s'affichent depuis le fichier avis.json (voir ses explications). Aucun service externe, aucun cookie.
-   2) Option : si vous préférez un outil tiers (Elfsight, etc.), renseignez AVIS_SCRIPT_SRC et AVIS_HTML ci-dessous.
-   Tant qu'aucun avis n'est saisi, seuls les liens vers votre fiche Google s'affichent. */
+   1) La note et le nombre d'avis sont relus sur la fiche Google via /api/avis.
+      Si cette lecture echoue, les valeurs de avis.json restent affichees.
+   2) Les textes des avis viennent de avis.json. Aucun service externe, aucun cookie. */
 var AVIS_SCRIPT_SRC = "";
 var AVIS_HTML = "";
 var AVIS_LIEN_FICHE = "https://maps.app.goo.gl/BEtwDMWG5gN9sgXv7"; /* votre fiche Google */
-var AVIS_LIEN_GOOGLE = ""; /* lien « Laisser un avis », ex. "https://g.page/r/XXXX/review" */
+var AVIS_LIEN_GOOGLE = ""; /* lien « Laisser un avis » ; sinon construit depuis /api/avis */
 var AVIS_JSON = "/avis.json";
 var AVIS_MAX = 6;
 (function () {
   var section = document.getElementById("avis");
-  if (!section || (!AVIS_HTML && !AVIS_LIEN_FICHE && !AVIS_LIEN_GOOGLE)) { return; }
-  section.hidden = false;
+  var mini = document.getElementById("avis-mini");
+  if (!section && !mini) { return; }
   var box = document.getElementById("avis-widget");
-  if (AVIS_HTML) { box.innerHTML = AVIS_HTML; }
-  if (AVIS_SCRIPT_SRC) { var s = document.createElement("script"); s.src = AVIS_SCRIPT_SRC; s.async = true; document.body.appendChild(s); }
-  if (AVIS_LIEN_FICHE) { var f = document.getElementById("avis-fiche"); f.href = AVIS_LIEN_FICHE; f.hidden = false; f.target = "_blank"; f.rel = "noopener"; }
-  if (AVIS_LIEN_GOOGLE) { var a = document.getElementById("avis-lien"); a.href = AVIS_LIEN_GOOGLE; a.hidden = false; a.target = "_blank"; a.rel = "noopener"; }
+  var minibox = document.getElementById("avis-widget-mini");
+  if (section) { section.hidden = false; }
+  if (mini) { mini.hidden = false; }
+  if (box && AVIS_HTML) { box.innerHTML = AVIS_HTML; }
+  if (AVIS_SCRIPT_SRC) { var sc = document.createElement("script"); sc.src = AVIS_SCRIPT_SRC; sc.async = true; document.body.appendChild(sc); }
+  var f = document.getElementById("avis-fiche");
+  if (f && AVIS_LIEN_FICHE) { f.href = AVIS_LIEN_FICHE; f.hidden = false; f.target = "_blank"; f.rel = "noopener"; }
+  var a = document.getElementById("avis-lien");
+  if (a && AVIS_LIEN_GOOGLE) { a.href = AVIS_LIEN_GOOGLE; a.hidden = false; a.target = "_blank"; a.rel = "noopener"; }
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) { e.className = cls; } if (txt !== undefined) { e.textContent = txt; } return e; }
-  function etoiles(n) { n = Math.max(0, Math.min(5, Math.round(n))); var e = el("span", "avis-etoiles", "\u2605\u2605\u2605\u2605\u2605".slice(0, n) + "\u2606\u2606\u2606\u2606\u2606".slice(0, 5 - n)); e.setAttribute("role", "img"); e.setAttribute("aria-label", n + " \\u00e9toiles sur 5"); return e; }
+  function etoiles(n) { n = Math.max(0, Math.min(5, Math.round(n))); var e = el("span", "avis-etoiles", "\u2605\u2605\u2605\u2605\u2605".slice(0, n) + "\u2606\u2606\u2606\u2606\u2606".slice(0, 5 - n)); e.setAttribute("role", "img"); e.setAttribute("aria-label", n + " \u00e9toiles sur 5"); return e; }
+  function resume(moy, total) {
+    var r = el("div", "avis-resume");
+    r.appendChild(el("strong", "avis-note", moy.toFixed(1).replace(".", ",") + " / 5"));
+    r.appendChild(etoiles(moy));
+    r.appendChild(el("span", "avis-nb", total + " avis Google"));
+    var m = el("span", "avis-maj", "");
+    m.hidden = true;
+    r.appendChild(m);
+    return r;
+  }
   function rendre(data) {
     if (AVIS_HTML || !data || !data.avis || !data.avis.length) { return; }
     var liste = data.avis.filter(function (x) { return x && x.texte && x.note >= 1; });
     if (!liste.length) { return; }
     var moy = data.note_moyenne > 0 ? data.note_moyenne : liste.reduce(function (t, x) { return t + x.note; }, 0) / liste.length;
     var total = data.nombre_total > 0 ? data.nombre_total : liste.length;
-    var r = el("div", "avis-resume");
-    r.appendChild(el("strong", "avis-note", moy.toFixed(1).replace(".", ",") + " / 5"));
-    r.appendChild(etoiles(moy));
-    r.appendChild(el("span", "avis-nb", total + (total > 1 ? " avis Google" : " avis Google")));
-    box.appendChild(r);
+    if (minibox) { minibox.appendChild(resume(moy, total)); }
+    if (!box) { return; }
+    box.appendChild(resume(moy, total));
     var g = el("div", "avis-ban");
     g.setAttribute("role", "region"); g.setAttribute("aria-label", "Avis de mes clients");
     var piste = el("div", "avis-piste");
@@ -1062,18 +1098,35 @@ var AVIS_MAX = 6;
     g.appendChild(piste);
     box.appendChild(g);
   }
-  /* Compteur en direct : /api/avis interroge la fiche Google (Worker Cloudflare).
+  var MOIS = ["janvier", "f\u00e9vrier", "mars", "avril", "mai", "juin", "juillet", "ao\u00fbt", "septembre", "octobre", "novembre", "d\u00e9cembre"];
+  function dateFr(iso) {
+    var p = String(iso || "").split("-");
+    if (p.length !== 3) { return ""; }
+    var j = parseInt(p[2], 10), m = parseInt(p[1], 10);
+    if (!j || !m || !MOIS[m - 1]) { return ""; }
+    return (j === 1 ? "1er" : j) + " " + MOIS[m - 1] + " " + p[0];
+  }
+  /* Compteur en direct : /api/avis relit la fiche Google (fonction Cloudflare).
      Si la reponse n'arrive pas, les valeurs de avis.json restent affichees. */
   function majDirect() {
     if (!window.fetch) { return; }
     fetch("/api/avis", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
       if (!d || !d.ok || !(d.note > 0)) { return; }
-      var n = box.querySelector(".avis-note");
-      var e = box.querySelector(".avis-etoiles");
-      var t = box.querySelector(".avis-nb");
-      if (n) { n.textContent = d.note.toFixed(1).replace(".", ",") + " / 5"; }
-      if (e && e.parentNode) { e.parentNode.replaceChild(etoiles(d.note), e); }
-      if (t && d.total > 0) { t.textContent = d.total + " avis Google"; }
+      Array.prototype.forEach.call(document.querySelectorAll(".avis-note"), function (n) { n.textContent = d.note.toFixed(1).replace(".", ",") + " / 5"; });
+      Array.prototype.forEach.call(document.querySelectorAll(".avis-etoiles"), function (e) {
+        if (e.parentNode && e.parentNode.className === "avis-resume") { e.parentNode.replaceChild(etoiles(d.note), e); }
+      });
+      if (d.total > 0) {
+        Array.prototype.forEach.call(document.querySelectorAll(".avis-nb"), function (t) { t.textContent = d.total + " avis Google"; });
+      }
+      var jour = dateFr(d.maj);
+      if (jour) {
+        Array.prototype.forEach.call(document.querySelectorAll(".avis-maj"), function (m) { m.textContent = "mis \u00e0 jour le " + jour; m.hidden = false; });
+      }
+      if (a && !AVIS_LIEN_GOOGLE && d.fiche) {
+        a.href = "https://search.google.com/local/writereview?placeid=" + encodeURIComponent(d.fiche);
+        a.hidden = false; a.target = "_blank"; a.rel = "noopener";
+      }
     }).catch(function () {});
   }
   if (!AVIS_HTML && typeof AVIS_DATA !== "undefined") { rendre(AVIS_DATA); majDirect(); }

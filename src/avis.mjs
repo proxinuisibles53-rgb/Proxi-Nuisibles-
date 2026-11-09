@@ -19,7 +19,7 @@ const CACHE_KO = 60; /* 1 min en cas d'erreur, pour reessayer vite */
 const RECHERCHE_DEFAUT = "Proxi Nuisibles Port-Brillet";
 /* A incrementer pour repartir d'un cache vide apres un changement
    de configuration (ajout du secret, changement de fiche...). */
-const VERSION = 8;
+const VERSION = 9;
 
 export async function servirAvis(request, env, ctx) {
   const origine = new URL(request.url).origin;
@@ -71,7 +71,9 @@ async function lireGoogle(env) {
       {
         headers: {
           "X-Goog-Api-Key": cleApi,
-          "X-Goog-FieldMask": "rating,userRatingCount",
+          /* id est facture au palier gratuit illimite ; la facturation
+             retient de toute facon le champ le plus eleve demande. */
+          "X-Goog-FieldMask": "id,rating,userRatingCount",
         },
       }
     );
@@ -86,6 +88,7 @@ async function lireGoogle(env) {
       ok: true,
       note: Math.round(d.rating * 10) / 10,
       total: d.userRatingCount || 0,
+      fiche: d.id || id,
       maj: new Date().toISOString().slice(0, 10),
     };
   } catch (e) {

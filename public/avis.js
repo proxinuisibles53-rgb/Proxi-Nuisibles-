@@ -35,37 +35,50 @@ var AVIS_DATA = {
   ]
 };
 /* AVIS GOOGLE
-   1) Vos avis s'affichent depuis le fichier avis.json (voir ses explications). Aucun service externe, aucun cookie.
-   2) Option : si vous préférez un outil tiers (Elfsight, etc.), renseignez AVIS_SCRIPT_SRC et AVIS_HTML ci-dessous.
-   Tant qu'aucun avis n'est saisi, seuls les liens vers votre fiche Google s'affichent. */
+   1) La note et le nombre d'avis sont relus sur la fiche Google via /api/avis.
+      Si cette lecture echoue, les valeurs de avis.json restent affichees.
+   2) Les textes des avis viennent de avis.json. Aucun service externe, aucun cookie. */
 var AVIS_SCRIPT_SRC = "";
 var AVIS_HTML = "";
 var AVIS_LIEN_FICHE = "https://maps.app.goo.gl/BEtwDMWG5gN9sgXv7"; /* votre fiche Google */
-var AVIS_LIEN_GOOGLE = ""; /* lien « Laisser un avis », ex. "https://g.page/r/XXXX/review" */
+var AVIS_LIEN_GOOGLE = ""; /* lien « Laisser un avis » ; sinon construit depuis /api/avis */
 var AVIS_JSON = "/avis.json";
 var AVIS_MAX = 6;
 (function () {
   var section = document.getElementById("avis");
-  if (!section || (!AVIS_HTML && !AVIS_LIEN_FICHE && !AVIS_LIEN_GOOGLE)) { return; }
-  section.hidden = false;
+  var mini = document.getElementById("avis-mini");
+  if (!section && !mini) { return; }
   var box = document.getElementById("avis-widget");
-  if (AVIS_HTML) { box.innerHTML = AVIS_HTML; }
-  if (AVIS_SCRIPT_SRC) { var s = document.createElement("script"); s.src = AVIS_SCRIPT_SRC; s.async = true; document.body.appendChild(s); }
-  if (AVIS_LIEN_FICHE) { var f = document.getElementById("avis-fiche"); f.href = AVIS_LIEN_FICHE; f.hidden = false; f.target = "_blank"; f.rel = "noopener"; }
-  if (AVIS_LIEN_GOOGLE) { var a = document.getElementById("avis-lien"); a.href = AVIS_LIEN_GOOGLE; a.hidden = false; a.target = "_blank"; a.rel = "noopener"; }
+  var minibox = document.getElementById("avis-widget-mini");
+  if (section) { section.hidden = false; }
+  if (mini) { mini.hidden = false; }
+  if (box && AVIS_HTML) { box.innerHTML = AVIS_HTML; }
+  if (AVIS_SCRIPT_SRC) { var sc = document.createElement("script"); sc.src = AVIS_SCRIPT_SRC; sc.async = true; document.body.appendChild(sc); }
+  var f = document.getElementById("avis-fiche");
+  if (f && AVIS_LIEN_FICHE) { f.href = AVIS_LIEN_FICHE; f.hidden = false; f.target = "_blank"; f.rel = "noopener"; }
+  var a = document.getElementById("avis-lien");
+  if (a && AVIS_LIEN_GOOGLE) { a.href = AVIS_LIEN_GOOGLE; a.hidden = false; a.target = "_blank"; a.rel = "noopener"; }
   function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) { e.className = cls; } if (txt !== undefined) { e.textContent = txt; } return e; }
-  function etoiles(n) { n = Math.max(0, Math.min(5, Math.round(n))); var e = el("span", "avis-etoiles", "★★★★★".slice(0, n) + "☆☆☆☆☆".slice(0, 5 - n)); e.setAttribute("role", "img"); e.setAttribute("aria-label", n + " \u00e9toiles sur 5"); return e; }
+  function etoiles(n) { n = Math.max(0, Math.min(5, Math.round(n))); var e = el("span", "avis-etoiles", "★★★★★".slice(0, n) + "☆☆☆☆☆".slice(0, 5 - n)); e.setAttribute("role", "img"); e.setAttribute("aria-label", n + " étoiles sur 5"); return e; }
+  function resume(moy, total) {
+    var r = el("div", "avis-resume");
+    r.appendChild(el("strong", "avis-note", moy.toFixed(1).replace(".", ",") + " / 5"));
+    r.appendChild(etoiles(moy));
+    r.appendChild(el("span", "avis-nb", total + " avis Google"));
+    var m = el("span", "avis-maj", "");
+    m.hidden = true;
+    r.appendChild(m);
+    return r;
+  }
   function rendre(data) {
     if (AVIS_HTML || !data || !data.avis || !data.avis.length) { return; }
     var liste = data.avis.filter(function (x) { return x && x.texte && x.note >= 1; });
     if (!liste.length) { return; }
     var moy = data.note_moyenne > 0 ? data.note_moyenne : liste.reduce(function (t, x) { return t + x.note; }, 0) / liste.length;
     var total = data.nombre_total > 0 ? data.nombre_total : liste.length;
-    var r = el("div", "avis-resume");
-    r.appendChild(el("strong", "avis-note", moy.toFixed(1).replace(".", ",") + " / 5"));
-    r.appendChild(etoiles(moy));
-    r.appendChild(el("span", "avis-nb", total + (total > 1 ? " avis Google" : " avis Google")));
-    box.appendChild(r);
+    if (minibox) { minibox.appendChild(resume(moy, total)); }
+    if (!box) { return; }
+    box.appendChild(resume(moy, total));
     var g = el("div", "avis-ban");
     g.setAttribute("role", "region"); g.setAttribute("aria-label", "Avis de mes clients");
     var piste = el("div", "avis-piste");
@@ -84,18 +97,35 @@ var AVIS_MAX = 6;
     g.appendChild(piste);
     box.appendChild(g);
   }
-  /* Compteur en direct : /api/avis interroge la fiche Google (Worker Cloudflare).
+  var MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
+  function dateFr(iso) {
+    var p = String(iso || "").split("-");
+    if (p.length !== 3) { return ""; }
+    var j = parseInt(p[2], 10), m = parseInt(p[1], 10);
+    if (!j || !m || !MOIS[m - 1]) { return ""; }
+    return (j === 1 ? "1er" : j) + " " + MOIS[m - 1] + " " + p[0];
+  }
+  /* Compteur en direct : /api/avis relit la fiche Google (fonction Cloudflare).
      Si la reponse n'arrive pas, les valeurs de avis.json restent affichees. */
   function majDirect() {
     if (!window.fetch) { return; }
     fetch("/api/avis", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
       if (!d || !d.ok || !(d.note > 0)) { return; }
-      var n = box.querySelector(".avis-note");
-      var e = box.querySelector(".avis-etoiles");
-      var t = box.querySelector(".avis-nb");
-      if (n) { n.textContent = d.note.toFixed(1).replace(".", ",") + " / 5"; }
-      if (e && e.parentNode) { e.parentNode.replaceChild(etoiles(d.note), e); }
-      if (t && d.total > 0) { t.textContent = d.total + " avis Google"; }
+      Array.prototype.forEach.call(document.querySelectorAll(".avis-note"), function (n) { n.textContent = d.note.toFixed(1).replace(".", ",") + " / 5"; });
+      Array.prototype.forEach.call(document.querySelectorAll(".avis-etoiles"), function (e) {
+        if (e.parentNode && e.parentNode.className === "avis-resume") { e.parentNode.replaceChild(etoiles(d.note), e); }
+      });
+      if (d.total > 0) {
+        Array.prototype.forEach.call(document.querySelectorAll(".avis-nb"), function (t) { t.textContent = d.total + " avis Google"; });
+      }
+      var jour = dateFr(d.maj);
+      if (jour) {
+        Array.prototype.forEach.call(document.querySelectorAll(".avis-maj"), function (m) { m.textContent = "mis à jour le " + jour; m.hidden = false; });
+      }
+      if (a && !AVIS_LIEN_GOOGLE && d.fiche) {
+        a.href = "https://search.google.com/local/writereview?placeid=" + encodeURIComponent(d.fiche);
+        a.hidden = false; a.target = "_blank"; a.rel = "noopener";
+      }
     }).catch(function () {});
   }
   if (!AVIS_HTML && typeof AVIS_DATA !== "undefined") { rendre(AVIS_DATA); majDirect(); }
