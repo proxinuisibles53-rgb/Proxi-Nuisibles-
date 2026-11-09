@@ -19,7 +19,7 @@ const CACHE_KO = 60; /* 1 min en cas d'erreur, pour reessayer vite */
 const RECHERCHE_DEFAUT = "Proxi Nuisibles Port-Brillet";
 /* A incrementer pour repartir d'un cache vide apres un changement
    de configuration (ajout du secret, changement de fiche...). */
-const VERSION = 9;
+const VERSION = 10;
 
 export async function servirAvis(request, env, ctx) {
   const origine = new URL(request.url).origin;
@@ -73,7 +73,7 @@ async function lireGoogle(env) {
           "X-Goog-Api-Key": cleApi,
           /* id est facture au palier gratuit illimite ; la facturation
              retient de toute facon le champ le plus eleve demande. */
-          "X-Goog-FieldMask": "id,rating,userRatingCount",
+          "X-Goog-FieldMask": "id,rating,userRatingCount,reviews",
         },
       }
     );
@@ -89,11 +89,38 @@ async function lireGoogle(env) {
       note: Math.round(d.rating * 10) / 10,
       total: d.userRatingCount || 0,
       fiche: d.id || id,
+      avis: lireAvis(d.reviews),
       maj: new Date().toISOString().slice(0, 10),
     };
   } catch (e) {
     return { ok: false, raison: "erreur_reseau" };
   }
+}
+
+/* Avis publies sur la fiche : Google en expose cinq au maximum et
+   choisit lesquels. Ils sont repris tels quels, avec le nom de leur
+   auteur et le lien vers l'avis, comme l'exigent les conditions
+   d'utilisation de Google Maps Platform. */
+function lireAvis(reviews) {
+  if (!Array.isArray(reviews)) {
+    return [];
+  }
+  return reviews
+    .slice(0, 5)
+    .map(function (r) {
+      const t = (r.text && r.text.text) || (r.originalText && r.originalText.text) || "";
+      const a = r.authorAttribution || {};
+      return {
+        note: r.rating || 0,
+        texte: String(t).trim(),
+        auteur: a.displayName || "Client",
+        date: r.relativePublishTimeDescription || "",
+        lien: r.googleMapsUri || a.uri || "",
+      };
+    })
+    .filter(function (x) {
+      return x.texte && x.note >= 1;
+    });
 }
 
 /* Recherche l'identifiant de la fiche. Champ demande : places.id
