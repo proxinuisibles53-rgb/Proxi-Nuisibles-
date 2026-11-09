@@ -19,7 +19,7 @@ const CACHE_KO = 60; /* 1 min en cas d'erreur, pour reessayer vite */
 const RECHERCHE_DEFAUT = "Proxi Nuisibles Port-Brillet";
 /* A incrementer pour repartir d'un cache vide apres un changement
    de configuration (ajout du secret, changement de fiche...). */
-const VERSION = 2;
+const VERSION = 3;
 
 export async function servirAvis(request, env, ctx) {
   const origine = new URL(request.url).origin;
@@ -34,6 +34,7 @@ export async function servirAvis(request, env, ctx) {
   }
 
   const data = await lireGoogle(env);
+  data.v = VERSION; /* repere de version, pour diagnostic */
   const reponse = new Response(JSON.stringify(data), {
     headers: {
       "content-type": "application/json; charset=utf-8",
