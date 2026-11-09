@@ -15,14 +15,17 @@
    ------------------------------------------------------------------ */
 
 const CACHE_OK = 86400; /* 24 h : limite les appels factures a ~1 par jour */
-const CACHE_KO = 600; /* 10 min en cas d'erreur, pour reessayer vite */
+const CACHE_KO = 60; /* 1 min en cas d'erreur, pour reessayer vite */
 const RECHERCHE_DEFAUT = "Proxi Nuisibles Port-Brillet";
+/* A incrementer pour repartir d'un cache vide apres un changement
+   de configuration (ajout du secret, changement de fiche...). */
+const VERSION = 2;
 
 export async function servirAvis(request, env, ctx) {
   const origine = new URL(request.url).origin;
   /* Cle de cache fixe : toutes les visites partagent la meme entree,
      impossible de declencher des appels Google avec des parametres. */
-  const cle = new Request(origine + "/__cache/avis", { method: "GET" });
+  const cle = new Request(origine + "/__cache/avis-v" + VERSION, { method: "GET" });
   const cache = caches.default;
 
   const garde = await cache.match(cle);
