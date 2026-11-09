@@ -84,8 +84,22 @@ var AVIS_MAX = 6;
     g.appendChild(piste);
     box.appendChild(g);
   }
-  if (!AVIS_HTML && typeof AVIS_DATA !== "undefined") { rendre(AVIS_DATA); }
+  /* Compteur en direct : /api/avis interroge la fiche Google (Worker Cloudflare).
+     Si la reponse n'arrive pas, les valeurs de avis.json restent affichees. */
+  function majDirect() {
+    if (!window.fetch) { return; }
+    fetch("/api/avis", { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      if (!d || !d.ok || !(d.note > 0)) { return; }
+      var n = box.querySelector(".avis-note");
+      var e = box.querySelector(".avis-etoiles");
+      var t = box.querySelector(".avis-nb");
+      if (n) { n.textContent = d.note.toFixed(1).replace(".", ",") + " / 5"; }
+      if (e && e.parentNode) { e.parentNode.replaceChild(etoiles(d.note), e); }
+      if (t && d.total > 0) { t.textContent = d.total + " avis Google"; }
+    }).catch(function () {});
+  }
+  if (!AVIS_HTML && typeof AVIS_DATA !== "undefined") { rendre(AVIS_DATA); majDirect(); }
   else if (!AVIS_HTML && AVIS_JSON && window.fetch) {
-    fetch(AVIS_JSON, { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(rendre).catch(function () {});
+    fetch(AVIS_JSON, { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) { rendre(d); majDirect(); }).catch(function () {});
   }
 })();

@@ -47,6 +47,44 @@ Les avis affichés sur le site viennent de `_generateur/assets/avis.json`
 (note moyenne, nombre total, et les avis repris de la fiche Google).
 Ils sont intégrés au fichier `avis.js` lors de la génération.
 
+### Compteur en direct
+
+La note et le nombre d'avis sont rafraîchis depuis la fiche Google
+Business Profile par l'adresse `/api/avis`, servie par Cloudflare :
+
+| Fichier | Rôle |
+|---|---|
+| `src/avis.mjs` | logique commune : appel Google, cache 24 h |
+| `src/index.mjs` | point d'entrée si le projet Cloudflare est un **Worker** |
+| `functions/api/avis.js` | point d'entrée si le projet Cloudflare est **Pages** |
+
+Un seul des deux points d'entrée est utilisé ; l'autre est ignoré.
+
+Variables à créer dans le tableau de bord Cloudflare (projet du site,
+*Settings* → *Variables and Secrets*) :
+
+| Nom | Type | Valeur |
+|---|---|---|
+| `GOOGLE_API_KEY` | Secret | clé Google Maps Platform (obligatoire) |
+| `PLACE_ID` | Texte | identifiant de la fiche (optionnel) |
+| `PLACE_QUERY` | Texte | recherche de la fiche si `PLACE_ID` absent |
+
+Sans `PLACE_ID`, la fiche est retrouvée par une recherche texte limitée
+au champ `places.id`, qui relève du palier gratuit illimité de Google.
+
+Côté facturation : seul le champ `rating` / `userRatingCount` est
+demandé, ce qui correspond au SKU *Place Details Enterprise*
+(1 000 appels gratuits par mois). Le cache de 24 heures ramène la
+consommation à quelques appels par jour. Il est conseillé de fixer en
+plus un plafond de quota dans Google Cloud.
+
+Si `GOOGLE_API_KEY` est absente ou si Google répond mal, `/api/avis`
+renvoie `{"ok":false}` et le site garde les valeurs de `avis.json`.
+Le compteur ne peut donc jamais casser l'affichage.
+
+Pour vérifier après un déploiement : ouvrir
+`https://www.proxinuisibles.fr/api/avis`.
+
 ## Déploiement
 
 Cloudflare Pages est relié à ce dépôt et publie la branche `main` à chaque envoi.
