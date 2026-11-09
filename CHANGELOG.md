@@ -1,5 +1,14 @@
 # Journal des modifications
 
+## 2026-11-09
+- Favicon refait : la tête de la mascotte sur fond vert foncé, au lieu du rat
+  entier déformé (l'ancienne icône n'était pas carrée et devenait illisible).
+  Cadrage resserré pour les petites tailles, et ajout de l'icône pour l'écran
+  d'accueil des mobiles (apple-touch-icon, 192 et 512 px) et de la couleur de
+  barre d'adresse.
+- Contrôle des liens internes corrigé : il vérifie maintenant aussi les fichiers
+  (icônes, feuille de style) au lieu de les signaler à tort.
+
 ## 2026-11-07
 - Bouton de retour en haut refait : rond discret avec un anneau orange qui se
   remplit selon la progression dans la page, placé au-dessus de la mascotte.
