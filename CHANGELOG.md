@@ -1,9 +1,8 @@
 # Journal des modifications
 
 ## 2026-11-09
-- Favicon refait : la tête de la mascotte sur fond vert foncé, au lieu du rat
-  entier déformé (l'ancienne icône n'était pas carrée et devenait illisible).
-  Cadrage resserré pour les petites tailles, et ajout de l'icône pour l'écran
+- Favicon refait : le rat entier sur fond carré vert foncé (l'ancienne icône
+  n'était pas carrée et se trouvait déformée par les navigateurs). Ajout de l'icône pour l'écran
   d'accueil des mobiles (apple-touch-icon, 192 et 512 px) et de la couleur de
   barre d'adresse.
 - Contrôle des liens internes corrigé : il vérifie maintenant aussi les fichiers
