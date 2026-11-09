@@ -78,20 +78,39 @@ var AVIS_MAX = 6;
     if (jour) { r.appendChild(el("span", "avis-maj", "mis à jour le " + jour)); }
     return r;
   }
+  function lien(txt, url, copie) {
+    var l = el("a", null, txt);
+    l.href = url; l.target = "_blank"; l.rel = "noopener nofollow";
+    if (copie) { l.tabIndex = -1; }
+    return l;
+  }
   function carte(x, copie) {
     var c = el("blockquote", "avis-carte");
     if (copie) { c.setAttribute("aria-hidden", "true"); }
+    var tete = el("div", "avis-tete");
+    if (x.photo) {
+      var img = document.createElement("img");
+      img.className = "avis-photo"; img.src = x.photo; img.alt = "";
+      img.width = 34; img.height = 34; img.loading = "lazy"; img.referrerPolicy = "no-referrer";
+      tete.appendChild(img);
+    }
+    var nom = x.auteur || "Client";
+    tete.appendChild(x.profil ? lien(nom, x.profil, copie) : el("span", null, nom));
+    c.appendChild(tete);
     c.appendChild(etoiles(x.note));
     c.appendChild(el("p", "avis-texte", x.texte));
     var pied = el("footer", "avis-auteur");
-    var qui = (x.auteur || "Client") + (x.date ? " · " + x.date : "");
-    if (x.lien && !copie) {
-      var l = el("a", null, qui);
-      l.href = x.lien; l.target = "_blank"; l.rel = "noopener nofollow";
-      pied.appendChild(l);
-    } else {
-      pied.textContent = qui;
+    var bouts = [];
+    if (x.date) { bouts.push(el("span", null, x.date)); }
+    if (x.visite && x.visite.an) {
+      bouts.push(el("span", null, "visite en " + (MOIS[x.visite.mois - 1] ? MOIS[x.visite.mois - 1] + " " : "") + x.visite.an));
     }
+    if (x.lien) { bouts.push(lien("voir sur Google Maps", x.lien, copie)); }
+    if (x.signalement) { bouts.push(lien("signaler", x.signalement, copie)); }
+    bouts.forEach(function (e, i) {
+      if (i) { pied.appendChild(document.createTextNode(" · ")); }
+      pied.appendChild(e);
+    });
     c.appendChild(pied);
     return c;
   }
@@ -112,6 +131,11 @@ var AVIS_MAX = 6;
     g.appendChild(piste);
     box.appendChild(g);
     box.appendChild(el("p", "avis-aide", "Faites glisser les avis du doigt pour les parcourir."));
+    var att = el("p", "avis-source");
+    att.appendChild(document.createTextNode("Avis publiés sur "));
+    att.appendChild(lien("Google Maps", AVIS_LIEN_FICHE, false));
+    att.appendChild(document.createTextNode(", classés par pertinence, tels que Google les transmet. Google ne vérifie pas les avis."));
+    box.appendChild(att);
   }
   function rendre(data) {
     if (AVIS_HTML || !data || !data.avis || !data.avis.length) { return; }

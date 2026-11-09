@@ -19,7 +19,7 @@ const CACHE_KO = 60; /* 1 min en cas d'erreur, pour reessayer vite */
 const RECHERCHE_DEFAUT = "Proxi Nuisibles Port-Brillet";
 /* A incrementer pour repartir d'un cache vide apres un changement
    de configuration (ajout du secret, changement de fiche...). */
-const VERSION = 10;
+const VERSION = 11;
 
 export async function servirAvis(request, env, ctx) {
   const origine = new URL(request.url).origin;
@@ -110,12 +110,19 @@ function lireAvis(reviews) {
     .map(function (r) {
       const t = (r.text && r.text.text) || (r.originalText && r.originalText.text) || "";
       const a = r.authorAttribution || {};
+      const v = r.visitDate;
       return {
         note: r.rating || 0,
         texte: String(t).trim(),
         auteur: a.displayName || "Client",
+        photo: a.photoUri || "",
+        profil: a.uri || "",
         date: r.relativePublishTimeDescription || "",
         lien: r.googleMapsUri || a.uri || "",
+        signalement: r.flagContentUri || "",
+        /* Date de visite : obligatoire en France pour l'affichage
+           d'avis en ligne (article L.111-7-2 du code de la consommation). */
+        visite: v && v.year ? { an: v.year, mois: v.month || 0 } : null,
       };
     })
     .filter(function (x) {
