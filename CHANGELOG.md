@@ -1,6 +1,9 @@
 # Journal des modifications
 
 ## 2026-11-09
+- Page Désinsectisation : « Punaises de lit » était la seule entrée de la liste
+  sans lien, c'est corrigé. La mention « (page dédiée) », répétée quatre fois,
+  est supprimée, et une ligne sur les autres insectes complète la liste.
 - Favicon refait : le rat entier sur fond carré vert foncé (l'ancienne icône
   n'était pas carrée et se trouvait déformée par les navigateurs). Ajout de l'icône pour l'écran
   d'accueil des mobiles (apple-touch-icon, 192 et 512 px) et de la couleur de
