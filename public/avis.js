@@ -96,6 +96,7 @@ var AVIS_MAX = 6;
     piste.style.setProperty("--dur", Math.max(40, cartes.length * 14) + "s");
     g.appendChild(piste);
     box.appendChild(g);
+    box.appendChild(el("p", "avis-aide", "Faites glisser les avis du doigt pour les parcourir."));
   }
   var MOIS = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août", "septembre", "octobre", "novembre", "décembre"];
   function dateFr(iso) {
