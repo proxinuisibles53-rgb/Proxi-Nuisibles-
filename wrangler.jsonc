@@ -2,6 +2,9 @@
   "name": "proxi-nuisibles",
   "compatibility_date": "2026-11-05",
   "main": "./src/index.mjs",
+  // Conserve les variables et secrets definis dans le tableau de bord.
+  // Sans cette option, « wrangler deploy » les efface a chaque build.
+  "keep_vars": true,
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
