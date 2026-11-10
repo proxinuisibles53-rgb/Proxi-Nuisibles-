@@ -132,9 +132,16 @@ var AVIS_MAX = 6;
     box.appendChild(g);
     box.appendChild(el("p", "avis-aide", "Faites glisser les avis du doigt pour les parcourir."));
     var att = el("p", "avis-source");
-    att.appendChild(document.createTextNode("Avis publiés sur "));
-    att.appendChild(lien("Google Maps", AVIS_LIEN_FICHE, false));
-    att.appendChild(document.createTextNode(", classés par pertinence, tels que Google les transmet. Google ne vérifie pas les avis."));
+    /* Logo officiel Google Maps, non modifie, hauteur 18 px, zone de
+       degagement assuree en CSS : exige par les regles d'attribution. */
+    var marque = document.createElement("img");
+    marque.className = "avis-logo"; marque.src = "/google-maps.svg";
+    marque.alt = "Google Maps"; marque.width = 98; marque.height = 18; marque.loading = "lazy";
+    var enveloppe = document.createElement("a");
+    enveloppe.href = AVIS_LIEN_FICHE; enveloppe.target = "_blank"; enveloppe.rel = "noopener";
+    enveloppe.appendChild(marque);
+    att.appendChild(enveloppe);
+    att.appendChild(el("span", "avis-source-txt", "Avis classés par pertinence, tels que Google les transmet. Google ne vérifie pas les avis."));
     box.appendChild(att);
   }
   function rendre(data) {
