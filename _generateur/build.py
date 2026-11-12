@@ -529,7 +529,20 @@ MENU_SERVICES = ["deratisation", "desinsectisation", "frelons-guepes", "frelon-a
 MENU_PRINCIPAUX = {"deratisation", "desinsectisation", "piegeur-agree"}
 _NOMS_MENU = dict([(s[0], s[1]) for s in SV] + [("contrat-annuel-deratisation", "Contrat annuel pro")])
 assert set(_NOMS_MENU) == set(MENU_SERVICES), "un service manque dans MENU_SERVICES"
-HEADER = ("<header class='top'><div class='wrap bar'><a class='logo' href='/'><img src='/logo-petit.webp' alt='' width='95' height='160'><img class='logo-txt' src='/logo-texte.webp' alt='Proxinuisibles, accueil' width='92' height='62'></a>"
+SVG_FB = "<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z'/></svg>"
+SVG_IG = "<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><rect x='2.5' y='2.5' width='19' height='19' rx='5.5' fill='none' stroke='currentColor' stroke-width='2'/><circle cx='12' cy='12' r='4.2' fill='none' stroke='currentColor' stroke-width='2'/><circle cx='17.4' cy='6.6' r='1.4'/></svg>"
+SVG_MSG = "<svg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M12 3C6.9 3 2.8 6.5 2.8 10.9c0 2.3 1.1 4.3 2.9 5.8-.1 1-.6 2.4-1.4 3.4 0 0 2.5-.4 4.3-1.7 1 .3 2.1.4 3.4.4 5.1 0 9.2-3.5 9.2-7.9S17.1 3 12 3z'/></svg>"
+from urllib.parse import quote as _url_q
+WA_LIEN = "https://wa.me/33664576655?text=" + _url_q("Bonjour, je vous contacte depuis votre site.")
+LIEN_FB = "https://www.facebook.com/profile.php?id=61557433013899"
+LIEN_IG = "https://www.instagram.com/proxinuisibles/"
+UTIL = ("<div class='util'><div class='wrap'>"
+  "<a class='util-ico' href='" + LIEN_FB + "' target='_blank' rel='noopener' aria-label='Proxinuisibles sur Facebook' title='Facebook'>" + SVG_FB + "</a>"
+  "<a class='util-ico' href='" + LIEN_IG + "' target='_blank' rel='noopener' aria-label='Proxinuisibles sur Instagram' title='Instagram'>" + SVG_IG + "</a>"
+  "<a class='util-wa' href='" + WA_LIEN + "' target='_blank' rel='noopener'>" + SVG_MSG + "<span>WhatsApp</span></a>"
+  "</div></div>")
+
+HEADER = ("<header class='top'>" + UTIL + "<div class='wrap bar'><a class='logo' href='/'><img src='/logo-petit.webp' alt='' width='95' height='160'><img class='logo-txt' src='/logo-texte.webp' alt='Proxinuisibles, accueil' width='92' height='62'></a>"
   "<button class='burger' type='button' aria-label='Menu' aria-expanded='false'>\u2630</button>"
   "<nav id='nav'><ul><li><a href='/'>Accueil</a></li>"
   "<li class='dd'><details><summary>Mes services</summary><ul>" + "".join("<li><a%s href='/%s/'>%s</a></li>" % (" class='nav-deb'" if s in MENU_PRINCIPAUX else "", s, _NOMS_MENU[s]) for s in MENU_SERVICES) +
@@ -538,7 +551,7 @@ HEADER = ("<header class='top'><div class='wrap bar'><a class='logo' href='/'><i
   "<a class='btn' href='tel:%s'>\u260e %s</a></div></header>" % (TEL, TEL_D))
 CTA = ("<section class='cta'><div class='wrap'><h2>Décrivez-moi ce que vous voyez. Je vous dirai comment avancer.</h2>"
        "<p>Un nid, des traces, des bruits dans les combles ? Appelez-moi directement.</p>"
-       "<div class='actions'><a class='btn' href='tel:%s'>Appeler le %s</a><a class='btn btn-light' href='mailto:%s'>Écrire par e-mail</a></div></div></section>" % (TEL, TEL_D, MAIL))
+       "<div class='actions'><a class='btn' href='tel:%s'>Appeler le %s</a><a class='btn btn-wa' href='%s' target='_blank' rel='noopener'>Écrire sur WhatsApp</a><a class='btn btn-light' href='mailto:%s'>Écrire par e-mail</a></div></div></section>" % (TEL, TEL_D, WA_LIEN, MAIL))
 
 def faq_html(d):
     return "<section class='sec alt'><div class='wrap'><h2>Questions fréquentes</h2>%s</div></section>" % "".join(
@@ -929,7 +942,7 @@ p,ul{max-width:70ch;margin:0 0 1em}
 .top{background:#fff;border-bottom:3px solid var(--orange);position:sticky;top:0;z-index:10}
 .bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
 .logo{font-weight:800;font-size:1.35rem;color:var(--olive);text-decoration:none}
-.top nav{flex:1}
+.top nav{flex:1;display:flex;justify-content:center}.util{background:var(--dark)}.util .wrap{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding-top:5px;padding-bottom:5px}.util-ico{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;color:#fff;text-decoration:none}.util-ico svg{width:19px;height:19px;fill:currentColor}.util-ico:hover{background:rgba(255,255,255,.15)}.util-wa{display:inline-flex;align-items:center;gap:7px;padding:4px 12px;border-radius:999px;background:#25d366;color:#07321a;font-weight:700;font-size:.82rem;text-decoration:none;line-height:1.5}.util-wa svg{width:16px;height:16px;fill:currentColor}.util-wa:hover{filter:brightness(1.08)}.btn-wa{background:#25d366;border-color:#25d366;color:#07321a}
 .top nav ul{list-style:none;display:flex;flex-wrap:nowrap;gap:6px 11px;margin:0;padding:0;max-width:none}
 .top nav a,.top nav summary{text-decoration:none;font-weight:600;font-size:.9rem;white-space:nowrap}
 .top nav a:hover{color:var(--olive);text-decoration:underline}
