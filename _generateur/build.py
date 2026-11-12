@@ -643,7 +643,7 @@ def home_page(path, d, title, meta, scripts):
                     (s[0], ico("/%s/" % s[0]), i + 1, T(TAGS[s[0]]), T(s[1]), T(s[5].split(".")[0] + ".")) for i, s in enumerate(SV))
     chips = "".join("<li><a href='/deratisation-%s/'>%s</a></li>" % (c[0], c[1]) for c in CITIES)
     h = ["<!DOCTYPE html><html lang='fr'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>"
-         "<title>%s</title><meta name='description' content=\"%s\"><link rel='canonical' href='%s%s'><link rel='stylesheet' href='/style.css'><link rel='icon' href='/favicon.ico' sizes='any'><link rel='icon' type='image/png' href='/favicon.png' sizes='64x64'><link rel='apple-touch-icon' href='/apple-touch-icon.png'><meta name='theme-color' content='#24261a'>%s</head><body>" %
+         "<title>%s</title><meta name='description' content=\"%s\"><link rel='canonical' href='%s%s'><link rel='stylesheet' href='/style.css'><link rel='icon' href='/favicon.ico' sizes='any'><link rel='icon' type='image/png' href='/favicon.png' sizes='64x64'><link rel='apple-touch-icon' href='/apple-touch-icon.png'><meta name='theme-color' content='#24261a'><meta property='og:site_name' content='Proxinuisibles'><meta property='og:locale' content='fr_FR'>%s</head><body>" %
          (title, meta.replace('"', ''), BASE, path, "".join(scripts)), HEADER]
     h.append("<section class='hero'><div class='wrap'><div><span class='label'>%s</span><h1>%s</h1><p>%s</p>"
              "<div class='actions'><a class='btn' href='tel:%s'>Appeler le %s</a><a class='btn btn-light' href='#services'>Découvrir mes services</a></div>"
@@ -872,6 +872,11 @@ def render(path, d):
               {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday", "Sunday"], "opens": "09:00", "closes": "18:00"}],
           "paymentAccepted": "Carte bancaire, espèces, chèque, virement", "priceRange": "$$"}
     scripts = ['<script type="application/ld+json">%s</script>' % json.dumps(ld, ensure_ascii=False)]
+    if d["kind"] == "home":
+        site_ld = {"@context": "https://schema.org", "@type": "WebSite", "name": "Proxinuisibles",
+                   "alternateName": ["Proxi Nuisibles", "Proxinuisibles 53"], "url": BASE + "/",
+                   "publisher": {"@type": "LocalBusiness", "name": "Proxinuisibles", "url": BASE + "/"}}
+        scripts.append('<script type="application/ld+json">%s</script>' % json.dumps(site_ld, ensure_ascii=False))
     if d["faq"]:
         fq = {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [
             {"@type": "Question", "name": T(q), "acceptedAnswer": {"@type": "Answer", "text": T(a)}} for q, a in d["faq"]]}
@@ -885,7 +890,7 @@ def render(path, d):
     if d["kind"] == "home":
         return home_page(path, d, title, meta, scripts)
     h = ["<!DOCTYPE html><html lang='fr'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>",
-         "<title>%s</title><meta name='description' content=\"%s\"><link rel='canonical' href='%s%s'><link rel='stylesheet' href='/style.css'><link rel='icon' href='/favicon.ico' sizes='any'><link rel='icon' type='image/png' href='/favicon.png' sizes='64x64'><link rel='apple-touch-icon' href='/apple-touch-icon.png'><meta name='theme-color' content='#24261a'>" % (title, meta.replace('"', ''), BASE, path) + d.get("head", ""),
+         "<title>%s</title><meta name='description' content=\"%s\"><link rel='canonical' href='%s%s'><link rel='stylesheet' href='/style.css'><link rel='icon' href='/favicon.ico' sizes='any'><link rel='icon' type='image/png' href='/favicon.png' sizes='64x64'><link rel='apple-touch-icon' href='/apple-touch-icon.png'><meta name='theme-color' content='#24261a'><meta property='og:site_name' content='Proxinuisibles'><meta property='og:locale' content='fr_FR'>" % (title, meta.replace('"', ''), BASE, path) + d.get("head", ""),
          "".join(scripts), "</head><body>",
          HEADER,
          "<section class='hero%s'>%s<div class='wrap'>%s%s<h1>%s</h1><p>%s</p>" % (hero_media(path) + (crumbs_html(_cs), ico(path), T(d["h1"]), T(d["lead"])))]
