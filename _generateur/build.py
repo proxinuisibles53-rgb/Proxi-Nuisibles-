@@ -430,6 +430,7 @@ exec(open("/home/claude/frelons_villes.py", encoding="utf-8").read())
 exec(open("/home/claude/services_villes.py", encoding="utf-8").read())
 exec(open("/home/claude/mentions.py", encoding="utf-8").read())
 exec(open("/home/claude/seo_deratiseur.py", encoding="utf-8").read())
+exec(open("/home/claude/laval.py", encoding="utf-8").read())
 
 # ---------- RENDU ----------
 NAV = [("Dératisation", "/deratisation/"), ("Frelons et guêpes", "/frelons-guepes/"), ("Désinsectisation", "/desinsectisation/"), ("Professionnels", "/professionnels/"), ("Devis et contact", "/contact/")]
