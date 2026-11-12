@@ -10,12 +10,13 @@ _lv = P["/deratisation-laval/"]
 # ---------- Titre et description : ce que l'internaute lit dans Google ----------
 # Le nom du site est désormais déclaré séparément (schéma WebSite), la marque
 # n'a donc plus à occuper la fin du titre.
-_lv["title"] = "Dératiseur à Laval : dératisation sous 24 à 48 h"
+_lv["title"] = "Dératiseur à Laval : intervention rapide, devis gratuit"
 _lv["meta"] = ("Dératiseur indépendant près de Laval : rats et souris en maison, commerce ou "
-               "immeuble. Intervention sous 24 à 48 h, diagnostic et devis gratuits.")
+               "immeuble. En général sous 24 à 48 h, urgences en priorité. Devis gratuit.")
 
 _lv["lead"] = ("Rats ou souris à Laval ? Je suis dératiseur indépendant, installé à Port-Brillet, "
-               "à vingt minutes du centre. J'interviens sous 24 à 48 heures chez les particuliers, "
+               "à vingt minutes du centre. J'interviens en général sous 24 à 48 heures, plus vite en cas "
+               "d'urgence réelle, chez les particuliers, "
                "dans les commerces et dans les copropriétés, avec un diagnostic et un devis gratuits.")
 
 # ---------- Sections proprement lavalloises ----------
@@ -89,9 +90,10 @@ _lv["faq"] = [
      "une colonie de rats dans une cave d'immeuble n'ont rien à voir. Le diagnostic et le devis "
      "sont gratuits, le déplacement est compris, et je vous annonce le prix avant de commencer."),
     ("Sous quel délai intervenez-vous à Laval ?",
-     "Je vise 24 à 48 heures. Je suis installé à Port-Brillet, à une vingtaine de minutes de Laval, "
-     "et je suis joignable de 8 h à 21 h en semaine et de 9 h à 18 h le week-end. Pour une urgence "
-     "réelle, appelez-moi plutôt que d'écrire, j'organise au plus vite."),
+     "Je vise 24 à 48 heures et j'y arrive la plupart du temps, mais ce n'est pas une garantie : "
+     "tout dépend de mon planning et de la saison. Les urgences réelles passent devant. Je suis "
+     "installé à Port-Brillet, à une vingtaine de minutes de Laval, et joignable de 8 h à 21 h en "
+     "semaine et de 9 h à 18 h le week-end : pour un cas pressant, appelez-moi plutôt que d'écrire."),
     ("Intervenez-vous dans tous les quartiers de Laval ?",
      "Oui, du centre-ville à Avesnières, Hilard, Grenoux, Bourny, Saint-Nicolas, Thévalles, "
      "Les Fourches, le Pavement et Laval Nord, ainsi que dans les communes voisines comme "

@@ -672,7 +672,7 @@ def home_page(path, d, title, meta, scripts):
              "<li><strong>Mayenne et Ille-et-Vilaine</strong><span>de Laval \u00e0 Rennes, particuliers et professionnels</span></li>"
              "<li><strong>Certibiocide n\u00b0 " + CERT_NUM + "</strong><span>produits homologu\u00e9s, loi EGalim</span></li>"
              "<li><strong>8h - 21h en semaine</strong><span>9h - 18h le samedi et le dimanche</span></li>"
-             "<li><strong>Intervention sous 24 \u00e0 48 h</strong><span>plus vite en cas d'urgence</span></li>"
+             "<li><strong>En g\u00e9n\u00e9ral sous 24 \u00e0 48 h</strong><span>urgences r\u00e9elles en priorit\u00e9</span></li>"
              "<li><strong>Devis gratuit, d\u00e9placement compris</strong><span>CB, esp\u00e8ces, ch\u00e8que et virement</span></li>"
              "</ul></div></section>")
     h.append("<section class='sec alt'><div class='wrap'><span class='label'>Me suivre</span><h2>Mes interventions au quotidien</h2>"
