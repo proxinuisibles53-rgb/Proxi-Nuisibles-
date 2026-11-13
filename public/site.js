@@ -112,4 +112,4 @@ for(var i=0;i<L.length;i++){L[i].addEventListener('click',function(){
   if(doux){window.scrollTo({top:0,behavior:'smooth'});}else{window.scrollTo(0,0);}
 });}
 maj();})();
-(function(){var b=document.querySelector('.saison');if(!b){return;}var d=new Date(),m=d.getMonth()+1,j=d.getDate();var ouvert=(m===10&&j>=15)||m===11||m===12||m===1||m===2||(m===3&&j<=15);if(!ouvert){return;}b.hidden=false;function monte(){var h=b.offsetHeight;if(h>40){b.style.setProperty('--monte',-(h-28)+'px');}}monte();window.addEventListener('resize',monte);if(window.ResizeObserver){new ResizeObserver(monte).observe(b);}})();
+(function(){var b=document.querySelector('.saison');if(!b){return;}var d=new Date(),m=d.getMonth()+1,j=d.getDate();var ouvert=(m===10&&j>=15)||m===11||m===12||m===1||m===2||(m===3&&j<=15);if(!ouvert){return;}b.hidden=false;})();
