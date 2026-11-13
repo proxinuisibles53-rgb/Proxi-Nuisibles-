@@ -126,12 +126,12 @@ SV = [
  ("chenilles-processionnaires", "Chenilles processionnaires", "Traitement des chenilles processionnaires en Mayenne et Ille-et-Vilaine",
   "Chenilles Processionnaires Mayenne | Proxinuisibles",
   "Traitement des chenilles processionnaires du pin et du chêne en Mayenne et Ille-et-Vilaine. Intervention sécurisée, devis gratuit.",
-  "Les poils urticants des chenilles processionnaires provoquent des irritations de la peau, des yeux et des voies respiratoires, et sont dangereux pour les chiens. Ne touchez pas aux nids.",
-  [("Pins et chênes", "La processionnaire du pin forme des nids blancs et soyeux dans les pins en hiver. La processionnaire du chêne descend en colonnes le long du tronc au printemps."),
+  "Les poils urticants des chenilles processionnaires provoquent des irritations de la peau, des yeux et des voies respiratoires, et sont dangereux pour les chiens. Ne touchez pas aux cocons.",
+  [("Pins et chênes", "La processionnaire du pin forme des cocons blancs et soyeux dans les pins en hiver. La processionnaire du chêne descend en colonnes le long du tronc au printemps."),
    ("Quand traiter", "Le bon moment dépend de l'espèce et de la saison. Je vous le précise lors du devis."),
    ("Où j'interviens", "Jardins de particuliers, écoles, campings, aires de jeux et espaces verts.")],
   [("Mon chien a touché une chenille, que faire ?", "Appelez sans attendre un vétérinaire : c'est une urgence."),
-   ("Puis-je couper le nid moi-même ?", "Non : les poils se dispersent et peuvent provoquer de graves irritations. Faites appel à un professionnel équipé.")]),
+   ("Puis-je couper le cocon moi-même ?", "Non : les poils se dispersent et peuvent provoquer de graves irritations. Faites appel à un professionnel équipé.")]),
  ("punaises-de-lit", "Punaises de lit", "Traitement des punaises de lit en Mayenne et Ille-et-Vilaine",
   "Traitement Punaises de Lit Mayenne | Proxinuisibles",
   "Traitement des punaises de lit en Mayenne et Ille-et-Vilaine : diagnostic, traitement discret et suivi. Particuliers, locations et gîtes.",
@@ -431,6 +431,7 @@ exec(open("/home/claude/services_villes.py", encoding="utf-8").read())
 exec(open("/home/claude/mentions.py", encoding="utf-8").read())
 exec(open("/home/claude/seo_deratiseur.py", encoding="utf-8").read())
 exec(open("/home/claude/laval.py", encoding="utf-8").read())
+exec(open("/home/claude/chenilles.py", encoding="utf-8").read())
 
 # ---------- RENDU ----------
 NAV = [("Dératisation", "/deratisation/"), ("Frelons et guêpes", "/frelons-guepes/"), ("Désinsectisation", "/desinsectisation/"), ("Professionnels", "/professionnels/"), ("Devis et contact", "/contact/")]
@@ -547,7 +548,7 @@ UTIL = ("<div class='util'><div class='wrap'>"
 # (voir SAISON_JS) pour qu'il disparaisse seul si le site n'est pas regenere.
 SAISON = ("<aside class='saison' hidden>"
           "<div class='wrap'><span class='saison-tag'>En ce moment</span>"
-          "<p>Les nids d’hiver de chenilles processionnaires du pin sont visibles dans les arbres. "
+          "<p>Les cocons d’hiver de chenilles processionnaires du pin sont visibles dans les arbres. "
           "L’échenillage se pratique tout l’hiver ; les écopièges, eux, doivent être posés "
           "<strong>avant la descente des chenilles</strong>, qui démarre en février.</p>"
           "<a class='btn btn-light' href='/chenilles-processionnaires/'>Traitement des chenilles \u2197</a></div></aside>")
@@ -742,7 +743,7 @@ MEDIA = {
  "/deratisation/": ("video", "deratisation-rats", "Des rats surmulots qui mangent de la nourriture laissée à l'extérieur", "Rats surmulots attirés par de la nourriture accessible : c'est ainsi qu'une infestation commence."),
  "/piegeur-agree/": ("video", "piegeage-ragondin", "Un ragondin au bord de l'eau, dans les roseaux", "Un ragondin au bord de l'eau : son piégeage est encadré par la loi."),
  "/desinsectisation/": ("video", "desinsectisation-fourmis", "Des fourmis autour de l'entrée de leur nid", "Des fourmis à l'entrée de leur nid : repérer le passage est la première étape du traitement."),
- "/chenilles-processionnaires/": ("image", "chenilles-nid-pin", "Un nid de chenilles processionnaires dans la cime d'un pin", "Un nid de chenilles processionnaires, visible en haut d'un pin."),
+ "/chenilles-processionnaires/": ("image", "chenilles-nid-pin", "Un cocon de chenilles processionnaires dans la cime d'un pin", "Un nid de chenilles processionnaires, visible en haut d'un pin."),
  "/depigeonnage/": ("video", "depigeonnage-pigeons-toit", "Des pigeons posés sur un toit, près d'une ventilation", "Des pigeons sur une toiture : ils s'installent vite sur les rebords et les ventilations.", 500),
  "/punaises-de-lit/": ("video", "punaises-lit-reelle", "Punaises de lit vivantes, œufs et taches noires dans la couture d'un matelas, filmés lors d'une intervention", "Images prises lors d'une de mes interventions : punaises vivantes, œufs et traces noires le long d'une couture.", 360),
  "/qui-suis-je/": ("image", "gwendal-portrait", "Portrait illustré de Gwendal, fondateur de Proxinuisibles, en tee-shirt noir à l'effigie de la marque", "Gwendal, fondateur de Proxinuisibles, basé à Port-Brillet.", 420),

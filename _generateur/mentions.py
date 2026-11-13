@@ -114,17 +114,17 @@ _c = P["/chenilles-processionnaires/"]
 _c["secs"] = list(_c["secs"]) + [
  ("Pose de pièges sur les troncs",
   "Je pose des pièges autour du tronc des arbres concernés, notamment les pins. Au printemps, les chenilles descendent en file le long du tronc pour s'enfouir dans le sol : le piège les intercepte et les recueille dans un sac, sans qu'elles atteignent le sol, votre pelouse ou vos animaux. Je règle la pose pour que le dispositif soit bien étanche autour de l'écorce, puis je repasse le retirer une fois la période de descente terminée."),
- ("Coupe des cocons et des nids",
-  "Quand les nids soyeux sont visibles dans la cime, je procède à leur coupe, appelée échenillage. Je porte une protection complète contre les poils urticants, je coupe le cocon avec la branche qui le porte, puis je le place dans un sac fermé pour l'évacuer et le détruire. Cette opération se fait en hiver, avant que les chenilles ne quittent leur nid. Ne montez pas sur une échelle pour le faire vous-même : les poils urticants se dispersent au moindre geste."),
+ ("La coupe des cocons, ou échenillage",
+  "Quand les cocons soyeux sont visibles dans la cime, je procède à leur coupe, appelée échenillage. Je porte une protection complète contre les poils urticants, je coupe le cocon avec la branche qui le porte, puis je le place dans un sac fermé pour l'évacuer et le détruire. Cette opération se fait en hiver, avant que les chenilles ne quittent leur cocon. Ne montez pas sur une échelle pour le faire vous-même : les poils urticants se dispersent au moindre geste."),
  ("Chênes : retrait des cocons à l'aspirateur, sans insecticide",
   "Sur les chênes, j'interviens aussi sur les cocons de processionnaires. Je les retire avec un aspirateur, sans aucun insecticide. Cette méthode évite de répandre des produits dans le jardin, autour des enfants, des animaux ou près d'une aire de jeux. Je porte une protection complète contre les poils urticants et je récupère les cocons et les chenilles pour les détruire, au lieu de les laisser tomber au sol."),
  ("Quelle méthode selon votre arbre ?",
-  "Pour un pin, je combine la coupe des nids et le piège sur le tronc. Pour un chêne, je retire les cocons à l'aspirateur. Lors de la visite, je regarde vos arbres, leur hauteur et leur accessibilité, puis je vous propose la solution adaptée dans un devis gratuit."),
+  "Pour un pin, je combine la coupe des cocons et le piège sur le tronc. Pour un chêne, je retire les cocons à l'aspirateur. Lors de la visite, je regarde vos arbres, leur hauteur et leur accessibilité, puis je vous propose la solution adaptée dans un devis gratuit."),
 ]
 _c["faq"] = list(_c["faq"]) + [
  ("À quoi sert un piège sur le tronc ?", "Il intercepte les chenilles processionnaires lorsqu'elles descendent en procession le long du tronc au printemps. Elles sont recueillies dans un sac et ne se dispersent pas dans le jardin."),
  ("Traitez-vous les chênes sans insecticide ?", "Oui. Je retire les cocons de processionnaires du chêne avec un aspirateur, sans insecticide, en portant une protection contre les poils urticants."),
- ("Faut-il couper les cocons ?", "Quand ils sont accessibles, la coupe des cocons en hiver supprime les chenilles avant leur sortie du nid. Elle doit être faite par un professionnel équipé, car les poils urticants sont dangereux."),
+ ("Faut-il couper les cocons ?", "Quand ils sont accessibles, la coupe des cocons en hiver supprime les chenilles avant leur sortie du cocon. Elle doit être faite par un professionnel équipé, car les poils urticants sont dangereux."),
 ]
 
 # --- Punaises de lit : traitement thermique ---
