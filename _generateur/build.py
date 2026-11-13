@@ -542,6 +542,22 @@ UTIL = ("<div class='util'><div class='wrap'>"
   "<a class='util-wa' href='" + WA_LIEN + "' target='_blank' rel='noopener'>" + SVG_MSG + "<span>WhatsApp</span></a>"
   "</div></div>")
 
+# Bandeau de saison : visible sur l'accueil et les pages chenilles, uniquement
+# pendant la saison du pin. Le masquage hors saison est fait par le navigateur
+# (voir SAISON_JS) pour qu'il disparaisse seul si le site n'est pas regenere.
+SAISON = ("<aside class='saison' hidden>"
+          "<div class='wrap'><span class='saison-tag'>En ce moment</span>"
+          "<p>Les nids d’hiver de chenilles processionnaires du pin sont visibles dans les arbres. "
+          "L’échenillage se pratique tout l’hiver ; les écopièges, eux, doivent être posés "
+          "<strong>avant la descente des chenilles</strong>, qui démarre en février.</p>"
+          "<a class='btn btn-light' href='/chenilles-processionnaires/'>Traitement des chenilles \u2197</a></div></aside>")
+
+SAISON_JS = ("(function(){var b=document.querySelector('.saison');if(!b){return;}"
+             "var d=new Date(),m=d.getMonth()+1,j=d.getDate();"
+             # du 15 octobre au 15 mars
+             "var ouvert=(m===10&&j>=15)||m===11||m===12||m===1||m===2||(m===3&&j<=15);"
+             "if(ouvert){b.hidden=false;}})();")
+
 HEADER = ("<header class='top'>" + UTIL + "<div class='wrap bar'><a class='logo' href='/'><img src='/logo-petit.webp' alt='' width='95' height='160'><img class='logo-txt' src='/logo-texte.webp' alt='Proxinuisibles, accueil' width='92' height='62'></a>"
   "<button class='burger' type='button' aria-label='Menu' aria-expanded='false'>\u2630</button>"
   "<nav id='nav'><ul><li><a href='/'>Accueil</a></li>"
@@ -658,7 +674,7 @@ def home_page(path, d, title, meta, scripts):
     chips = "".join("<li><a href='/deratisation-%s/'>%s</a></li>" % (c[0], c[1]) for c in CITIES)
     h = ["<!DOCTYPE html><html lang='fr'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>"
          "<title>%s</title><meta name='description' content=\"%s\"><link rel='canonical' href='%s%s'><link rel='stylesheet' href='/style.css'><link rel='icon' href='/favicon.ico' sizes='any'><link rel='icon' type='image/png' href='/favicon.png' sizes='64x64'><link rel='apple-touch-icon' href='/apple-touch-icon.png'><meta name='theme-color' content='#24261a'><meta property='og:site_name' content='Proxinuisibles'><meta property='og:locale' content='fr_FR'>%s</head><body>" %
-         (title, meta.replace('"', ''), BASE, path, "".join(scripts)), HEADER]
+         (title, meta.replace('"', ''), BASE, path, "".join(scripts)), HEADER, SAISON]
     h.append("<section class='hero'><div class='wrap'><div><span class='label'>%s</span><h1>%s</h1><p>%s</p>"
              "<div class='actions'><a class='btn' href='tel:%s'>Appeler le %s</a><a class='btn btn-light' href='#services'>Découvrir mes services</a></div>"
              "<p class='facts'>%s</p></div></div></section>" %
@@ -907,6 +923,7 @@ def render(path, d):
          "<title>%s</title><meta name='description' content=\"%s\"><link rel='canonical' href='%s%s'><link rel='stylesheet' href='/style.css'><link rel='icon' href='/favicon.ico' sizes='any'><link rel='icon' type='image/png' href='/favicon.png' sizes='64x64'><link rel='apple-touch-icon' href='/apple-touch-icon.png'><meta name='theme-color' content='#24261a'><meta property='og:site_name' content='Proxinuisibles'><meta property='og:locale' content='fr_FR'>" % (title, meta.replace('"', ''), BASE, path) + d.get("head", ""),
          "".join(scripts), "</head><body>",
          HEADER,
+         SAISON if path.startswith("/chenilles-processionnaires") else "",
          "<section class='hero%s'>%s<div class='wrap'>%s%s<h1>%s</h1><p>%s</p>" % (hero_media(path) + (crumbs_html(_cs), ico(path), T(d["h1"]), T(d["lead"])))]
     if d["kind"] != "legal":
         h.append("<div class='actions'><a class='btn' href='tel:%s'>Appeler le %s</a><a class='btn btn-light' href='/contact/'>Demander un devis</a>%s</div>" % (TEL, TEL_D, ("<a class='btn btn-light' href='/deratisation/'>Voir la prestation de dératisation</a>" if path.startswith(("/deratisation-", "/contrat-deratisation-", "/contrats-metiers-de-bouche")) else "")))
@@ -942,7 +959,7 @@ p,ul{max-width:70ch;margin:0 0 1em}
 .top{background:#fff;border-bottom:3px solid var(--orange);position:sticky;top:0;z-index:10}
 .bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-top:12px;padding-bottom:12px}
 .logo{font-weight:800;font-size:1.35rem;color:var(--olive);text-decoration:none}
-.top nav{flex:1;display:flex;justify-content:center}.util{background:var(--dark)}.util .wrap{display:flex;align-items:center;justify-content:flex-end;gap:12px;padding-top:6px;padding-bottom:6px}.util-ico{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;color:#fff;text-decoration:none}.util-ico svg{width:23px;height:23px;fill:currentColor}.util-ico:hover{background:rgba(255,255,255,.15)}.util-wa{display:inline-flex;align-items:center;gap:8px;padding:6px 15px;border-radius:999px;background:#25d366;color:#07321a;font-weight:700;font-size:.92rem;text-decoration:none;line-height:1.5}.util-wa svg{width:19px;height:19px;fill:currentColor}.util-wa:hover{filter:brightness(1.08)}.btn-wa{background:#25d366;border-color:#25d366;color:#07321a}
+.top nav{flex:1;display:flex;justify-content:center}.util{background:var(--dark)}.util .wrap{display:flex;align-items:center;justify-content:flex-end;gap:12px;padding-top:6px;padding-bottom:6px}.util-ico{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:9px;color:#fff;text-decoration:none}.util-ico svg{width:23px;height:23px;fill:currentColor}.util-ico:hover{background:rgba(255,255,255,.15)}.util-wa{display:inline-flex;align-items:center;gap:8px;padding:6px 15px;border-radius:999px;background:#25d366;color:#07321a;font-weight:700;font-size:.92rem;text-decoration:none;line-height:1.5}.util-wa svg{width:19px;height:19px;fill:currentColor}.util-wa:hover{filter:brightness(1.08)}.saison{background:var(--dark);color:#fff;border-bottom:3px solid var(--orange)}.saison .wrap{display:flex;align-items:center;gap:14px 20px;flex-wrap:wrap;padding-top:14px;padding-bottom:14px}.saison-tag{background:var(--orange);color:var(--dark);font-weight:800;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;white-space:nowrap}.saison p{margin:0;flex:1;min-width:260px;font-size:.95rem;line-height:1.55}.saison strong{color:var(--orange)}.saison .btn{white-space:nowrap}@media(max-width:700px){.saison .wrap{gap:10px}.saison p{font-size:.9rem}.saison .btn{width:100%;text-align:center}}.btn-wa{background:#25d366;border-color:#25d366;color:#07321a}
 .top nav ul{list-style:none;display:flex;flex-wrap:nowrap;gap:6px 11px;margin:0;padding:0;max-width:none}.top nav>ul>li{display:flex;align-items:center}
 .top nav a,.top nav summary{text-decoration:none;font-weight:600;font-size:.9rem;white-space:nowrap}.top nav>ul>li>a,.dd summary{display:inline-flex;align-items:center;line-height:1.3}
 .top nav a:hover{color:var(--olive);text-decoration:underline}
@@ -1255,7 +1272,7 @@ for(var i=0;i<L.length;i++){L[i].addEventListener('click',function(){
 });}
 maj();})();
 """
-SITE_JS = SITE_JS + FORM_JS + TOP_JS
+SITE_JS = SITE_JS + FORM_JS + TOP_JS + SAISON_JS
 CARTE_JS = """
 (function(){var el=document.getElementById('carte');if(!el||typeof L==='undefined')return;
 var tactile=window.matchMedia&&window.matchMedia('(pointer: coarse)').matches;
