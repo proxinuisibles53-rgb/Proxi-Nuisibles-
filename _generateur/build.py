@@ -814,14 +814,46 @@ MEDIA.update(globals().get("MEDIA_EXTRA", {}))
 # Hero : la vidéo remplace le bloc de couleur, uniquement sur les pages qui ont une vidéo
 HERO_SKIP = ("/qui-suis-je/",)
 
+# Les pages de commune n'ont pas de média propre : elles reprennent celui de
+# leur famille, mais sous forme d'image fixe. Ce sont les pages qui doivent se
+# charger le plus vite, et y poser 180 vidéos en lecture automatique pèserait
+# un demi-mégaoctet par visite pour un rendu quasiment identique.
+_FAM_MEDIA = (
+    ("/chenilles-processionnaires-", "/chenilles-processionnaires/"),
+    ("/frelons-guepes-", "/frelons-guepes/"),
+    ("/punaises-de-lit-", "/punaises-de-lit/"),
+    ("/desinsectisation-", "/desinsectisation/"),
+    ("/depigeonnage-", "/depigeonnage/"),
+    ("/piegeur-agree-", "/piegeur-agree/"),
+    ("/taupier-", "/taupier/"),
+    ("/contrat-deratisation-", "/contrats-metiers-de-bouche/"),
+    ("/deratisation-", "/deratisation/"),
+)
+
+def media_famille(path):
+    """Média hérité pour une page de commune : (nom de l'image fixe) ou None."""
+    if path in MEDIA or path in HERO_SKIP:
+        return None
+    for prefixe, mere in _FAM_MEDIA:
+        if path.startswith(prefixe):
+            m = MEDIA.get(mere)
+            if m:
+                return (m[1] + "-poster") if m[0] == "video" else m[1]
+            return None
+    return None
+
 def has_hero_video(path):
-    m = MEDIA.get(path)
-    return bool(m) and path not in HERO_SKIP
+    if path in HERO_SKIP:
+        return False
+    return bool(MEDIA.get(path)) or bool(media_famille(path))
 
 def hero_media(path):
     """Renvoie (classe, html de fond) pour le hero : vidéo ou image à la place du bloc de couleur."""
     if not has_hero_video(path):
         return "", ""
+    if path not in MEDIA:
+        el = "<img src='/media/%s.webp' alt='' aria-hidden='true' fetchpriority='high'>" % media_famille(path)
+        return " hero-media", "<div class='hero-bg' aria-hidden='true'>%s</div>" % el
     kind, name = MEDIA[path][0], MEDIA[path][1]
     if kind == "video":
         el = ("<video autoplay muted loop playsinline preload='metadata' poster='/media/%s-poster.webp' aria-hidden='true' tabindex='-1'>"
