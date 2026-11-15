@@ -734,10 +734,11 @@ def home_page(path, d, title, meta, scripts):
     h = ["<!DOCTYPE html><html lang='fr'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>"
          "<title>%s</title><meta name='description' content=\"%s\"><link rel='canonical' href='%s%s'><link rel='stylesheet' href='/style.css'><link rel='icon' href='/favicon.ico' sizes='any'><link rel='icon' type='image/png' href='/favicon.png' sizes='64x64'><link rel='apple-touch-icon' href='/apple-touch-icon.png'><meta name='theme-color' content='#24261a'><meta property='og:site_name' content='Proxinuisibles'><meta property='og:locale' content='fr_FR'>%s%s</head><body>" %
          (title, meta.replace('"', ''), BASE, path, partage(path, title, meta), "".join(scripts)), HEADER, SAISON]
-    h.append("<section class='hero'><div class='wrap'><div><span class='label'>%s</span><h1>%s</h1><p>%s</p>"
+    _hc, _hb = hero_media("/")
+    h.append("<section class='hero%s'>%s<div class='wrap'><div><span class='label'>%s</span><h1>%s</h1><p>%s</p>"
              "<div class='actions'><a class='btn' href='tel:%s'>Appeler le %s</a><a class='btn btn-light' href='#services'>Découvrir mes services</a></div>"
              "<p class='facts'>%s</p></div></div></section>" %
-             (T("Dératiseur et désinsectisation · Mayenne et Ille-et-Vilaine"), T(d["h1"]), T(d["lead"]), TEL, TEL_D, T("Mayenne et Ille-et-Vilaine · Particuliers, agriculteurs et professionnels · Diagnostic et devis gratuits")))
+             (_hc, _hb, T("Dératiseur et désinsectisation · Mayenne et Ille-et-Vilaine"), T(d["h1"]), T(d["lead"]), TEL, TEL_D, T("Mayenne et Ille-et-Vilaine · Particuliers, agriculteurs et professionnels · Diagnostic et devis gratuits")))
     h.append(profils_html())
     h.append("<section class='sec' id='toutes-prestations'><div class='wrap'><span class='label'>Toutes mes prestations</span><h2>Une réponse précise à chaque nuisible</h2><p>Vous savez déjà ce que vous cherchez ? Choisissez directement la prestation.</p><div class='grid'>%s</div></div></section>" % cards.replace("d'i", "d\u2019i"))
     h.append("<section class='sec alt'><div class='wrap'><span class='label'>Pourquoi me choisir</span><h2>Un interlocuteur, une méthode, un suivi</h2><div class='why'>"
