@@ -546,6 +546,62 @@ UTIL = ("<div class='util'><div class='wrap'>"
 # Bandeau de saison : visible sur l'accueil et les pages chenilles, uniquement
 # pendant la saison du pin. Le masquage hors saison est fait par le navigateur
 # (voir SAISON_JS) pour qu'il disparaisse seul si le site n'est pas regenere.
+# ----- balises de partage (aperçu des liens sur Facebook, WhatsApp, X…) -----
+# Les visuels sont fabriqués par partage.py, au format 1200x630 en JPEG,
+# seul format que tous les réseaux savent lire.
+_OG_FAM = (
+    ("/contrats-metiers-de-bouche", "professionnels"),
+    ("/contrat-deratisation-", "professionnels"),
+    ("/deratisation-boulangerie", "professionnels"),
+    ("/deratisation-boucherie", "professionnels"),
+    ("/deratisation-restaurant", "professionnels"),
+    ("/deratisation-traiteur", "professionnels"),
+    ("/deratisation-cuisine", "professionnels"),
+    ("/professionnels", "professionnels"),
+    ("/agences-syndics", "professionnels"),
+    ("/agriculteurs", "professionnels"),
+    ("/deratisation", "deratisation"),
+    ("/frelon-asiatique", "frelons"),
+    ("/frelons-guepes", "frelons"),
+    ("/punaises-de-lit", "punaises"),
+    ("/chenilles-processionnaires", "chenilles"),
+    ("/blattes-cafards", "desinsectisation"),
+    ("/fourmis", "desinsectisation"),
+    ("/puces", "desinsectisation"),
+    ("/desinsectisation", "desinsectisation"),
+    ("/mouches", "mouches"),
+    ("/depigeonnage", "depigeonnage"),
+    ("/taupier", "taupes"),
+    ("/taupes", "taupes"),
+    ("/piegeur", "piegeage"),
+    ("/piegeage", "piegeage"),
+    ("/debarras", "debarras"),
+    ("/qui-suis-je", "qui-suis-je"),
+)
+
+def og_image(path):
+    for prefixe, nom in _OG_FAM:
+        if path.startswith(prefixe):
+            return nom
+    return "defaut"
+
+def partage(path, title, meta):
+    img = BASE + "/partage/og-%s.jpg" % og_image(path)
+    t = title.replace('"', "").replace("&", "&amp;")
+    m = meta.replace('"', "").replace("&", "&amp;")
+    return ("<meta property='og:type' content='website'>"
+            "<meta property='og:url' content=\"%s%s\">"
+            "<meta property='og:title' content=\"%s\">"
+            "<meta property='og:description' content=\"%s\">"
+            "<meta property='og:image' content=\"%s\">"
+            "<meta property='og:image:width' content='1200'>"
+            "<meta property='og:image:height' content='630'>"
+            "<meta property='og:image:alt' content=\"%s\">"
+            "<meta name='twitter:card' content='summary_large_image'>"
+            "<meta name='twitter:title' content=\"%s\">"
+            "<meta name='twitter:description' content=\"%s\">"
+            "<meta name='twitter:image' content=\"%s\">") % (BASE, path, t, m, img, t, t, m, img)
+
 SAISON = ("<aside class='saison' hidden>"
           "<div class='wrap'><span class='saison-tag'>En ce moment</span>"
           "<p>Les cocons d’hiver de chenilles processionnaires du pin sont visibles dans les arbres. "
@@ -676,8 +732,8 @@ def home_page(path, d, title, meta, scripts):
                     (s[0], ico("/%s/" % s[0]), i + 1, T(TAGS[s[0]]), T(s[1]), T(s[5].split(".")[0] + ".")) for i, s in enumerate(SV))
     chips = "".join("<li><a href='/deratisation-%s/'>%s</a></li>" % (c[0], c[1]) for c in CITIES)
     h = ["<!DOCTYPE html><html lang='fr'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>"
-         "<title>%s</title><meta name='description' content=\"%s\"><link rel='canonical' href='%s%s'><link rel='stylesheet' href='/style.css'><link rel='icon' href='/favicon.ico' sizes='any'><link rel='icon' type='image/png' href='/favicon.png' sizes='64x64'><link rel='apple-touch-icon' href='/apple-touch-icon.png'><meta name='theme-color' content='#24261a'><meta property='og:site_name' content='Proxinuisibles'><meta property='og:locale' content='fr_FR'>%s</head><body>" %
-         (title, meta.replace('"', ''), BASE, path, "".join(scripts)), HEADER, SAISON]
+         "<title>%s</title><meta name='description' content=\"%s\"><link rel='canonical' href='%s%s'><link rel='stylesheet' href='/style.css'><link rel='icon' href='/favicon.ico' sizes='any'><link rel='icon' type='image/png' href='/favicon.png' sizes='64x64'><link rel='apple-touch-icon' href='/apple-touch-icon.png'><meta name='theme-color' content='#24261a'><meta property='og:site_name' content='Proxinuisibles'><meta property='og:locale' content='fr_FR'>%s%s</head><body>" %
+         (title, meta.replace('"', ''), BASE, path, partage(path, title, meta), "".join(scripts)), HEADER, SAISON]
     h.append("<section class='hero'><div class='wrap'><div><span class='label'>%s</span><h1>%s</h1><p>%s</p>"
              "<div class='actions'><a class='btn' href='tel:%s'>Appeler le %s</a><a class='btn btn-light' href='#services'>Découvrir mes services</a></div>"
              "<p class='facts'>%s</p></div></div></section>" %
@@ -923,7 +979,7 @@ def render(path, d):
     if d["kind"] == "home":
         return home_page(path, d, title, meta, scripts)
     h = ["<!DOCTYPE html><html lang='fr'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'>",
-         "<title>%s</title><meta name='description' content=\"%s\"><link rel='canonical' href='%s%s'><link rel='stylesheet' href='/style.css'><link rel='icon' href='/favicon.ico' sizes='any'><link rel='icon' type='image/png' href='/favicon.png' sizes='64x64'><link rel='apple-touch-icon' href='/apple-touch-icon.png'><meta name='theme-color' content='#24261a'><meta property='og:site_name' content='Proxinuisibles'><meta property='og:locale' content='fr_FR'>" % (title, meta.replace('"', ''), BASE, path) + d.get("head", ""),
+         "<title>%s</title><meta name='description' content=\"%s\"><link rel='canonical' href='%s%s'><link rel='stylesheet' href='/style.css'><link rel='icon' href='/favicon.ico' sizes='any'><link rel='icon' type='image/png' href='/favicon.png' sizes='64x64'><link rel='apple-touch-icon' href='/apple-touch-icon.png'><meta name='theme-color' content='#24261a'><meta property='og:site_name' content='Proxinuisibles'><meta property='og:locale' content='fr_FR'>%s" % (title, meta.replace('"', ''), BASE, path, partage(path, title, meta)) + d.get("head", ""),
          "".join(scripts), "</head><body>",
          HEADER,
          SAISON if path.startswith("/chenilles-processionnaires") else "",
@@ -1296,11 +1352,45 @@ os.makedirs(OUT + "/leaflet", exist_ok=True)
 for _f in ("leaflet.js", "leaflet.css", "LICENSE.txt"):
     shutil.copy("/home/claude/assets/leaflet/" + _f, OUT + "/leaflet/" + _f)
 open(OUT + "/carte.js", "w", encoding="utf-8").write("var ZONE = " + open("/home/claude/assets/zone.geojson", encoding="utf-8").read() + ";\n" + CARTE_JS)
+os.makedirs(OUT + "/partage", exist_ok=True)
+for _f in os.listdir("/home/claude/assets/partage"):
+    shutil.copy("/home/claude/assets/partage/" + _f, OUT + "/partage/" + _f)
 os.makedirs(OUT + "/media", exist_ok=True)
 for _f in os.listdir("/home/claude/assets/media"):
     shutil.copy("/home/claude/assets/media/" + _f, OUT + "/media/" + _f)
 open(OUT + "/wrangler.jsonc", "w", encoding="utf-8").write('{\n  "name": "proxinuisibles",\n  "compatibility_date": "2026-11-02",\n  "assets": { "directory": "./" }\n}\n')
 open(OUT + "/.assetsignore", "w", encoding="utf-8").write("wrangler.jsonc\n.assetsignore\n.git\nnode_modules\n")
+# ----- page d'erreur 404 -----
+# Cloudflare la sert automatiquement pour toute adresse inconnue.
+_404 = ("<!doctype html><html lang='fr'><head><meta charset='utf-8'>"
+        "<meta name='viewport' content='width=device-width,initial-scale=1'>"
+        "<title>Page introuvable | Proxinuisibles</title>"
+        "<meta name='robots' content='noindex'>"
+        "<link rel='stylesheet' href='/style.css'>"
+        "<link rel='icon' href='/favicon.ico' sizes='any'>"
+        "<link rel='icon' type='image/png' href='/favicon.png' sizes='64x64'>"
+        "<meta name='theme-color' content='#24261a'></head><body>"
+        + HEADER +
+        "<section class='hero'><div class='wrap'><div>"
+        "<span class='label'>Erreur 404</span>"
+        "<h1>Cette page n\u2019existe pas</h1>"
+        "<p>Le lien que vous avez suivi est peut-\u00eatre p\u00e9rim\u00e9, ou l\u2019adresse comporte "
+        "une faute de frappe. Rien de grave : voici par o\u00f9 reprendre.</p>"
+        "<div class='actions'><a class='btn' href='/'>Retour \u00e0 l\u2019accueil</a>"
+        "<a class='btn btn-light' href='tel:" + TEL + "'>Appeler le " + TEL_D + "</a></div>"
+        "</div></div></section>"
+        "<section class='sec'><div class='wrap'><h2>Les pages les plus consult\u00e9es</h2>"
+        "<div class='grid'>"
+        "<a class='scard' href='/deratisation/'><h3>D\u00e9ratisation</h3><p>Rats et souris, chez les particuliers comme chez les professionnels.</p></a>"
+        "<a class='scard' href='/frelons-guepes/'><h3>Frelons et gu\u00eapes</h3><p>Destruction de nids, frelon asiatique compris.</p></a>"
+        "<a class='scard' href='/punaises-de-lit/'><h3>Punaises de lit</h3><p>Traitement thermique, sans insecticide.</p></a>"
+        "<a class='scard' href='/chenilles-processionnaires/'><h3>Chenilles processionnaires</h3><p>\u00c9chenillage et \u00e9copi\u00e8ges, de novembre \u00e0 f\u00e9vrier.</p></a>"
+        "<a class='scard' href='/desinsectisation/'><h3>D\u00e9sinsectisation</h3><p>Cafards, puces, fourmis, mouches.</p></a>"
+        "<a class='scard' href='/contact/'><h3>Devis et contact</h3><p>Diagnostic et devis gratuits, d\u00e9placement compris.</p></a>"
+        "</div></div></section>"
+        + CTA + FOOT + "<script src='/site.js'></script></body></html>")
+open(OUT + "/404.html", "w", encoding="utf-8").write(_404)
+
 open(OUT + "/robots.txt", "w").write("User-agent: *\nAllow: /\nSitemap: %s/sitemap.xml\n" % BASE)
 open(OUT + "/sitemap.xml", "w", encoding="utf-8").write(
     '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' +
