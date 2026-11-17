@@ -167,6 +167,7 @@ _SVC_DEF = {
        ("Puis-je couper le cocon moi-même ?", "Non : les poils se dispersent et provoquent de fortes irritations. Faites appel à un professionnel équipé."),
        ("À quelle période faut-il intervenir ?", "La coupe des cocons de la processionnaire du pin se fait en hiver ; les pièges se posent avant la descente des chenilles. Je vous précise le bon moment lors du devis."),
        ("Utilisez-vous des insecticides ?", "Mes méthodes sont mécaniques : pièges, coupe des cocons et aspiration. Sur les chênes, je n'utilise aucun insecticide."),
+       ("Et le traitement au Btk ?", "Le Btk est une bactérie pulvérisée sur le feuillage, qui n'agit que de septembre à novembre, sur de très jeunes chenilles. C'est un produit phytopharmaceutique réservé aux entreprises agréées pour cette activité. Je travaille mécaniquement, d'octobre à avril."),
        ("Les chenilles reviennent-elles chaque année ?", "Souvent, oui : un arbre touché attire de nouveau les papillons. Un suivi d'une année sur l'autre permet de garder la situation sous contrôle.")]),
 
  "taupier": dict(
@@ -269,7 +270,10 @@ for _svc, _villes in _SVV.items():
         _k = (_i * 7 + len(_svc)) % len(_COMB3)
         secs = [_loc] + [D["pool"][j] for j in _COMB3[_k]]
         secs.append(("Mon intervention à %s" % _nom, D["fin"][_i % len(D["fin"])] % v))
-        faq = [D["faq"][j] for j in _FCOMB3[(_i * 3 + len(_svc)) % len(_FCOMB3)]]
+        # Les combinaisons sont calculées sur la longueur réelle de la liste :
+        # une prestation qui compte six questions les fait toutes tourner.
+        _fc = _FCOMB3 if len(D["faq"]) <= 5 else list(_it.combinations(range(len(D["faq"])), 3))
+        faq = [D["faq"][j] for j in _fc[(_i * 3 + len(_svc)) % len(_fc)]]
         autres = [("%s à %s" % (lab, _nom), "/%s-%s/" % (s, _slug)) for lab, s in _AUTRES
                   if s != _svc and (("/%s-%s/" % (s, _slug)) in P or ("/%s-%s/" % (s, _slug)) in _SV_PAGES)]
         autres.append(("%s : la prestation" % D["court"], "/%s/" % _svc))

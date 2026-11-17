@@ -21,7 +21,15 @@ _nouvelles = [
      "C'est ce qui décide de ce qu'on peut faire pour vous aujourd'hui, et de ce qu'il sera trop tard "
      "de faire dans six semaines.\n"
      "- <strong>Juillet et août</strong> : les papillons pondent sur les aiguilles. Rien à faire à ce stade.\n"
-     "- <strong>Automne</strong> : les chenilles éclosent et commencent à tisser leurs abris.\n"
+     "- <strong>De septembre à novembre</strong> : les chenilles éclosent et passent par leurs premiers "
+     "stades. C'est la seule fenêtre où un traitement au Btk (une bactérie, <em>Bacillus thuringiensis "
+     "kurstaki</em>) peut agir : il doit être ingéré avec les aiguilles, donc il ne fonctionne que sur de "
+     "très jeunes chenilles. Passé ce stade, il ne sert plus à rien, et l'arbre reste à traiter autrement. "
+     "Le Btk est un produit phytopharmaceutique : son application chez un tiers est réservée aux entreprises "
+     "qui détiennent l'agrément prévu par le code rural. Ce n'est pas ma méthode — je travaille "
+     "mécaniquement, à l'écopiège et à la coupe — mais si un pin doit être traité en septembre, autant que "
+     "vous le sachiez en septembre. Au fil de l'automne, les chenilles grossissent et tissent le cocon "
+     "d'hiver.\n"
      "- <strong>D'octobre à janvier</strong> : pose des écopièges autour des troncs. Ils doivent être "
      "en place avant la descente, sans quoi ils ne servent à rien pour l'année en cours.\n"
      "- <strong>De novembre à février</strong> : les cocons d'hiver sont visibles dans la cime. "
@@ -73,6 +81,15 @@ _ch["faq"] = [
      "Les écopièges se posent d'octobre à janvier : ils doivent être en place avant la descente des "
      "chenilles, qui démarre selon l'année entre février et avril. Un écopiège posé après le début de "
      "la procession ne sert plus à rien pour la saison."),
+    ("Et le traitement au Btk, vous le faites ?",
+     "Non, et je préfère vous le dire franchement. Le Btk est une bactérie pulvérisée sur le feuillage, "
+     "que les jeunes chenilles avalent en mangeant les aiguilles : il ne se pose donc que de septembre à "
+     "novembre, sur des chenilles encore petites. C'est un produit phytopharmaceutique, dont l'application "
+     "chez un particulier ou une collectivité est réservée aux entreprises agréées pour cette activité. "
+     "Je travaille mécaniquement : écopièges sur les troncs, coupe des cocons en hiver et, sur les chênes, "
+     "retrait à l'aspirateur. Ces méthodes couvrent la saison d'octobre à avril, et elles ne répandent rien "
+     "dans votre jardin. Si vous êtes en septembre et que votre pin est très infesté, appelez-moi quand "
+     "même : je vous dis ce qui est encore jouable cette année."),
     ("Suis-je obligé de faire traiter mes arbres ?",
      "Il n'y a pas d'obligation nationale générale. Mais depuis le décret du 25 avril 2022, les "
      "processionnaires sont classées parmi les espèces nuisibles à la santé humaine, et le préfet peut "
@@ -92,3 +109,14 @@ _ch["faq"] = [
      "Les poils restent urticants longtemps après la chute, et un simple coup de râteau ou de souffleur les "
      "remet en suspension. Appelez-moi, je viens le récupérer et l'évacuer."),
 ] + list(_ch["faq"])
+
+# « chenilles laval » est la requête la plus vue de la saison (108 affichages
+# en trois mois, position 8). La question du Btk doit y figurer, quelle que
+# soit la rotation des questions fréquentes entre les pages communes.
+_BTK = ("Et le traitement au Btk ?",
+        "Le Btk est une bactérie pulvérisée sur le feuillage, qui n'agit que de septembre à novembre, "
+        "sur de très jeunes chenilles. C'est un produit phytopharmaceutique réservé aux entreprises "
+        "agréées pour cette activité. Je travaille mécaniquement, d'octobre à avril.")
+_cl = P.get("/chenilles-processionnaires-laval/")
+if _cl and not any(q[0] == _BTK[0] for q in _cl["faq"]):
+    _cl["faq"] = list(_cl["faq"])[:2] + [_BTK]
