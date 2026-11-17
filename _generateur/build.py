@@ -1307,6 +1307,8 @@ SITE_JS = """document.addEventListener("click",function(e){var b=e.target.closes
 if os.path.exists(OUT):
     shutil.rmtree(OUT)
 os.makedirs(OUT)
+exec(open("/home/claude/titres.py", encoding="utf-8").read())
+
 for path, d in P.items():
     folder = OUT + path
     os.makedirs(folder, exist_ok=True)
@@ -1423,6 +1425,17 @@ _404 = ("<!doctype html><html lang='fr'><head><meta charset='utf-8'>"
         "</div></div></section>"
         + CTA + FOOT + "<script src='/site.js'></script></body></html>")
 open(OUT + "/404.html", "w", encoding="utf-8").write(_404)
+
+# Anciennes URL du site Wix encore cherchées par Google (404 relevés en Search
+# Console le 17/11/2026). On les renvoie vers la page équivalente du nouveau site.
+_REDIR = [
+    ("/dératisationvitré/", "/deratisation-vitre/"),
+    ("/d%C3%A9ratisationvitr%C3%A9/", "/deratisation-vitre/"),
+    ("/destructionniddeguêpesvitré/", "/frelons-guepes-vitre/"),
+    ("/destructionniddegu%C3%AApesvitr%C3%A9/", "/frelons-guepes-vitre/"),
+]
+open(OUT + "/_redirects", "w", encoding="utf-8").write(
+    "".join("%s %s 301\n" % (a, b) for a, b in _REDIR))
 
 open(OUT + "/robots.txt", "w").write("User-agent: *\nAllow: /\nSitemap: %s/sitemap.xml\n" % BASE)
 open(OUT + "/sitemap.xml", "w", encoding="utf-8").write(
