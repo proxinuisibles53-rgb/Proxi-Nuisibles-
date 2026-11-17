@@ -17,9 +17,13 @@
 const CACHE_OK = 86400; /* 24 h : limite les appels factures a ~1 par jour */
 const CACHE_KO = 60; /* 1 min en cas d'erreur, pour reessayer vite */
 const RECHERCHE_DEFAUT = "Proxi Nuisibles Port-Brillet";
+/* Identifiant de la fiche Google, relevé le 17/11/2026. Ce n'est pas un
+   secret : il figure dans toute adresse Google Maps de l'établissement.
+   Le renseigner évite une recherche facturable à chaque lecture. */
+const FICHE_DEFAUT = "ChIJNz0w97RLa6UR206AJMBfdTY";
 /* A incrementer pour repartir d'un cache vide apres un changement
    de configuration (ajout du secret, changement de fiche...). */
-const VERSION = 11;
+const VERSION = 12;
 
 export async function servirAvis(request, env, ctx) {
   const origine = new URL(request.url).origin;
@@ -59,7 +63,7 @@ async function lireGoogle(env) {
     return { ok: false, raison: "cle_absente" };
   }
   try {
-    let id = env.PLACE_ID;
+    let id = env.PLACE_ID || FICHE_DEFAUT;
     if (!id) {
       id = await trouverFiche(cleApi, env.PLACE_QUERY || RECHERCHE_DEFAUT);
     }
