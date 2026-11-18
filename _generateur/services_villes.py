@@ -58,6 +58,52 @@ _L("chenilles-processionnaires", "mayenne", "Mayenne", "53", "Jardins de ville e
 _L("chenilles-processionnaires", "port-brillet", "Port-Brillet", "53", "Chez moi, à Port-Brillet",
  "Port-Brillet est la commune où je suis installé. Les pins des jardins et les chênes des bois et des haies alentour sont concernés chaque année.\nJe peux passer rapidement pour un diagnostic, poser des pièges sur les troncs ou couper les cocons en hiver.")
 
+# ---- Ille-et-Vilaine ----
+_L("chenilles-processionnaires", "fougeres", "Fougères", "35", "Jardins de la ville haute et lisières de forêt",
+ "À Fougères, les pins d'ornement des jardins et des squares côtoient les lisières boisées qui ceinturent la ville. Les chenilles descendent le long des troncs pour s'enfouir, et c'est à ce moment qu'on les croise sur un trottoir ou une allée.\nSi vous apercevez une file de chenilles au sol, ne tentez pas de la balayer : le souffle et le frottement libèrent les poils urticants. Appelez-moi, je viens poser des pièges et couper ce qui doit l'être.")
+_L("chenilles-processionnaires", "chateaugiron", "Châteaugiron", "35", "Lotissements récents et arbres d'ornement",
+ "À Châteaugiron, les lotissements construits ces vingt dernières années ont été plantés de conifères d'agrément, aujourd'hui assez hauts pour héberger des cocons hors de portée du sol. Un seul pin en limite de propriété concerne souvent deux ou trois familles.\nJ'interviens sur demande d'un propriétaire comme à la demande d'une copropriété, et je donne le même devis à tout le monde avant de venir.")
+_L("chenilles-processionnaires", "la-guerche-de-bretagne", "La Guerche-de-Bretagne", "35", "Bourg, jardins et chênes de bordure",
+ "Autour de La Guerche-de-Bretagne, les chênes des haies et des bords de parcelles sont autant concernés que les pins des jardins. Sur chêne, le cocon est plus plat, plaqué contre le tronc ou une grosse branche, et passe facilement inaperçu.\nSur ces arbres-là, je retire les cocons à l'aspirateur et je les évacue en sac fermé : rien n'est pulvérisé, rien ne tombe au sol.")
+_L("chenilles-processionnaires", "argentre-du-plessis", "Argentré-du-Plessis", "35", "Parcs, allées et jardins arborés",
+ "À Argentré-du-Plessis, les grands arbres des parcs et des allées font le charme de la commune, et ce sont souvent les plus anciens qui portent les cocons les plus hauts. Plus le cocon est haut, plus il faut du matériel, et moins l'improvisation est une bonne idée.\nJe passe d'abord voir l'arbre et je vous dis franchement ce qui est faisable depuis le sol et ce qui ne l'est pas.")
+_L("chenilles-processionnaires", "balaze", "Balazé", "35", "Bocage et pins de jardin",
+ "Balazé mêle bocage, bois et jardins de bourg. Les pins isolés plantés en fond de jardin sont les plus exposés : rien ne les protège du vol des papillons en été, et le cocon s'y installe tranquillement à l'automne.\nL'écopiège posé autour du tronc intercepte les chenilles pendant leur descente, mais il doit être en place avant février : posé après, il ne sert à rien pour l'année en cours.")
+_L("chenilles-processionnaires", "etrelles", "Étrelles", "35", "Bourg, zones d'activités et haies",
+ "À Étrelles, les abords des zones d'activités et les haies qui bordent les parcelles accueillent des chênes et des conifères où les cocons passent l'hiver. Les salariés qui déjeunent dehors ou traversent un parking planté y sont exposés sans le savoir.\nPour une entreprise comme pour un particulier, j'interviens en protection complète et j'évacue tout ce que je coupe.")
+_L("chenilles-processionnaires", "chatillon-en-vendelais", "Châtillon-en-Vendelais", "35", "Abords de l'étang et arbres de promenade",
+ "À Châtillon-en-Vendelais, les arbres qui bordent les chemins de promenade et les abords de l'étang sont fréquentés toute l'année par des familles et des chiens. C'est exactement le genre d'endroit où une procession au sol pose un vrai problème au printemps.\nUn chien qui flaire ou lèche une chenille est une urgence vétérinaire : la langue peut nécroser en quelques heures. N'attendez pas, ni pour le chien, ni pour l'arbre.")
+
+# ---- Mayenne ----
+_L("chenilles-processionnaires", "ernee", "Ernée", "53", "Bocage et vallée de l'Ernée",
+ "Autour d'Ernée, le bocage alterne haies de chênes et jardins plantés de conifères. Dans les haies, les cocons sont souvent repérés depuis une parcelle voisine avant de l'être depuis la maison.\nSi vous êtes agriculteur ou propriétaire d'une haie concernée, je peux traiter l'alignement complet plutôt qu'arbre par arbre : c'est plus efficace et moins cher au passage.")
+_L("chenilles-processionnaires", "chateau-gontier", "Château-Gontier", "53", "Bords de Mayenne et jardins de ville",
+ "À Château-Gontier, les promenades le long de la Mayenne et les jardins de la ville comptent de beaux sujets, pins compris. Une procession qui traverse un chemin de halage très passant concerne beaucoup de monde d'un coup.\nJe me déplace sur toute la basse Mayenne, avec un tarif annoncé avant de venir et le déplacement compris.")
+_L("chenilles-processionnaires", "craon", "Craon", "53", "Parcs, hippodrome et propriétés arborées",
+ "À Craon, les parcs et les grandes propriétés arborées abritent des conifères anciens, parfois très hauts. Les chevaux et les chiens qui fréquentent ces espaces sont exposés au même titre que les promeneurs.\nJe vous dis au téléphone ce qu'il faut faire en attendant : baliser le pied de l'arbre et empêcher l'accès des animaux à la zone.")
+_L("chenilles-processionnaires", "louverne", "Louverné", "53", "Lotissements au nord de Laval",
+ "À Louverné, les jardins des lotissements plantés dans les années quatre-vingt-dix arrivent aujourd'hui à maturité : les conifères d'agrément y sont assez grands pour accueillir plusieurs cocons sur le même arbre.\nQuand il y en a plusieurs, je combine souvent la coupe pour ce qui est accessible et l'écopiège pour le reste. C'est la solution la plus sûre sur un grand sujet.")
+_L("chenilles-processionnaires", "bonchamp-les-laval", "Bonchamp-lès-Laval", "53", "Jardins pavillonnaires et espaces verts",
+ "À Bonchamp-lès-Laval, les pins de jardin pavillonnaire et les arbres des espaces publics sont les plus concernés. Un cocon se repère bien l'hiver, quand il n'y a plus de feuilles autour pour le cacher : une boule blanche et soyeuse au bout d'une branche.\nC'est le bon moment pour m'appeler. L'hiver est la saison de l'échenillage, et je suis à vingt minutes.")
+_L("chenilles-processionnaires", "cosse-le-vivien", "Cossé-le-Vivien", "53", "Bourg, bocage et haies de chênes",
+ "À Cossé-le-Vivien, les chênes des haies bocagères sont au moins aussi concernés que les pins des jardins. Beaucoup de propriétaires ne pensent pas au chêne et cherchent le cocon uniquement sur les résineux.\nSur les chênes, je travaille à l'aspirateur, sans insecticide. Les cocons partent en sac fermé et rien n'est répandu dans votre terrain.")
+_L("chenilles-processionnaires", "entrammes", "Entrammes", "53", "Vallée de la Mayenne et abords boisés",
+ "À Entrammes, la vallée de la Mayenne et ses abords boisés sont parcourus toute l'année. Les arbres de bord de chemin peuvent porter des cocons que personne ne voit, jusqu'au jour où les chenilles descendent en file le long du tronc.\nSi vous gérez un chemin, un camping ou un site ouvert au public, mieux vaut faire le tour des arbres en janvier qu'en mars.")
+_L("chenilles-processionnaires", "juvigne", "Juvigné", "53", "Bocage, étang et jardins de bourg",
+ "À Juvigné, entre bocage, bois et jardins de bourg, les pins isolés et les chênes de haie se partagent les cocons. Les parcelles bordées d'arbres anciens sont celles où l'on en trouve le plus.\nJe suis installé à une quinzaine de kilomètres : je peux venir faire un diagnostic et vous dire combien d'arbres sont réellement touchés avant d'engager quoi que ce soit.")
+_L("chenilles-processionnaires", "la-gravelle", "La Gravelle", "53", "Aux portes de la Bretagne",
+ "À La Gravelle, à la limite de l'Ille-et-Vilaine, les haies et les jardins plantés de conifères bordent l'axe routier et les hameaux. L'exposition au vent n'empêche pas les cocons de tenir : ils sont conçus pour passer l'hiver dehors.\nJe couvre les deux départements depuis Port-Brillet, à quelques kilomètres d'ici. Le déplacement est compris dans le tarif.")
+_L("chenilles-processionnaires", "le-genest-saint-isle", "Le Genest-Saint-Isle", "53", "Bois, étangs et jardins voisins",
+ "Au Genest-Saint-Isle, les bois et les abords d'étangs côtoient les jardins du bourg. C'est une commune que je connais bien : elle jouxte celle où je suis installé, et j'y interviens régulièrement.\nUn cocon repéré, un doute sur un arbre, une procession au sol : appelez-moi, je peux passer très vite.")
+_L("chenilles-processionnaires", "le-bourgneuf-la-foret", "Le Bourgneuf-la-Forêt", "53", "Lisières boisées et chênes de haie",
+ "Au Bourgneuf-la-Forêt, les lisières et les haies de chênes font partie du paysage quotidien. Sur chêne, le cocon ne ressemble pas à celui du pin : il est plus discret, souvent collé au tronc, et on passe devant sans le voir.\nJe vous montre quoi regarder, et sur ces arbres j'interviens à l'aspirateur, sans aucun produit.")
+_L("chenilles-processionnaires", "loiron-ruille", "Loiron-Ruillé", "53", "Bocage entre Laval et Port-Brillet",
+ "À Loiron-Ruillé, le bocage et les jardins de bourg se partagent les arbres concernés. Les propriétés avec une rangée de conifères en brise-vent sont les plus souvent touchées, parce que l'alignement attire les pontes.\nSur un brise-vent, je traite l'ensemble d'un seul passage plutôt qu'arbre par arbre, et le devis en tient compte.")
+_L("chenilles-processionnaires", "quelaines-saint-gault", "Quelaines-Saint-Gault", "53", "Jardins du bourg et campagne alentour",
+ "À Quelaines-Saint-Gault, les jardins du bourg et les fermes alentour comptent des pins et des chênes où les cocons s'installent chaque année. Les enfants qui jouent dehors et les chiens sont les premiers concernés au moment de la descente.\nNe touchez à rien et ne tondez pas sous l'arbre : la tondeuse projette les poils urticants dans l'air. Je viens voir et je vous dis ce qu'il en est.")
+_L("chenilles-processionnaires", "saint-pierre-la-cour", "Saint-Pierre-la-Cour", "53", "Bourg, sites industriels et haies",
+ "À Saint-Pierre-la-Cour, les abords des sites d'activité et les haies des hameaux portent des arbres que personne ne surveille particulièrement. Un cocon y passe l'hiver sans déranger, jusqu'à la procession de février ou mars.\nPour un site professionnel, je peux faire le tour des arbres une fois par an en janvier : c'est le passage qui évite les mauvaises surprises au printemps.")
+
 # ======================= TAUPIER =======================
 _L("taupier", "laval", "Laval", "53", "Pelouses et jardins à Laval",
  "À Laval, on m'appelle surtout pour des pelouses de maisons individuelles, des jardins familiaux et des espaces verts. Quelques taupinières suffisent à abîmer une pelouse et à gêner la tonte.\nJe repère les galeries actives et je pose des pièges, puis je repasse jusqu'à ce que la taupe soit prise.")
@@ -159,7 +205,10 @@ _SVC_DEF = {
         ("La coupe des cocons en hiver", "Quand les cocons sont visibles et accessibles, je les coupe en hiver, avant que les chenilles n'en sortent. Je coupe le cocon avec la branche qui le porte et je le place dans un sac fermé pour le détruire.\nJe porte une protection complète : les poils urticants se dispersent au moindre geste."),
         ("Sur les chênes, l'aspirateur sans insecticide", "Sur les chênes, je retire les cocons et les chenilles avec un aspirateur, sans aucun insecticide. Rien n'est répandu dans le jardin, près des enfants, des animaux ou d'une aire de jeux.\nLes cocons et les chenilles sont récupérés pour être détruits, au lieu de tomber au sol."),
         ("Un vrai danger pour les enfants et les chiens", "Les poils des chenilles provoquent des démangeaisons, des irritations des yeux et parfois des gênes respiratoires. Ils restent urticants longtemps, même dans un cocon abandonné.\nLes chiens sont particulièrement exposés, car ils flairent et lèchent les chenilles. Si votre chien a été en contact, appelez sans attendre un vétérinaire."),
-        ("Particuliers, écoles et collectivités", "J'interviens dans les jardins des particuliers, les résidences, les écoles, les campings, les aires de jeux et les espaces verts communaux.\nPour un site qui accueille du public, je vous aide à organiser les interventions d'une année sur l'autre, car un arbre touché l'est souvent à nouveau.")],
+        ("Particuliers, écoles et collectivités", "J'interviens dans les jardins des particuliers, les résidences, les écoles, les campings, les aires de jeux et les espaces verts communaux.\nPour un site qui accueille du public, je vous aide à organiser les interventions d'une année sur l'autre, car un arbre touché l'est souvent à nouveau."),
+        ("Ce qu'il ne faut surtout pas faire", "N'arrosez pas le cocon au jet, ne le brûlez pas, ne le faites pas tomber à la perche et ne tondez pas sous l'arbre. Chacun de ces gestes met les poils urticants en suspension dans l'air, et c'est souvent là que les accidents arrivent.\nNe ramassez pas non plus une chenille au balai ou au souffleur. Laissez l'arbre tranquille, éloignez enfants et animaux, et appelez-moi : j'arrive équipé pour que rien ne se disperse."),
+        ("Pourquoi elles reviennent l'année suivante", "Un arbre traité peut être recolonisé dès l'été qui suit : les papillons volent sur plusieurs kilomètres et reviennent pondre là où les conditions leur conviennent. Ce n'est pas un échec du traitement, c'est le cycle de l'insecte.\nC'est pourquoi je vous dis à quel moment regarder l'arbre l'hiver suivant, et pourquoi les sites qui accueillent du public ont intérêt à un passage annuel plutôt qu'à une intervention d'urgence au printemps."),
+        ("Le calendrier commande tout", "Chaque méthode n'a qu'une fenêtre. L'écopiège doit être posé avant la descente des chenilles, qui démarre en février : posé après, il ne sert à rien pour l'année en cours. La coupe des cocons se pratique de novembre à février, quand ils sont visibles dans la cime.\nAppelez-moi même si vous pensez être hors période : je vous dirai ce qui reste faisable cette année et ce qu'il vaut mieux programmer pour la suivante.")],
   fin=["Envoyez-moi une photo du cocon ou des chenilles, prise à distance : je vous dis de quelle espèce il s'agit et quelle solution convient.\nJe vous donne un tarif avant de venir, déplacement compris, et j'interviens à %(nom)s avec une protection complète. Je suis joignable de 8h à 21h en semaine et de 9h à 18h le week-end.",
        "À %(nom)s, je viens voir l'arbre et je vous propose la méthode adaptée : pièges, coupe des cocons ou aspiration.\nLe devis est gratuit et le déplacement compris. En attendant mon passage, gardez enfants et animaux à distance et ne touchez à rien.",
        "Je me déplace à %(nom)s depuis Port-Brillet. Je vous annonce le prix avant de venir, puis j'interviens et j'évacue les cocons dans des sacs fermés.\nJe vous indique aussi quand repasser l'année suivante, car un arbre touché l'est souvent de nouveau."],
@@ -240,6 +289,7 @@ _SVC_DEF = {
        ("Intervenez-vous pour les ragondins ?", "Oui, autour des étangs, des mares, des fossés et des cours d'eau, chez les particuliers, les agriculteurs et les collectivités.")]),
 }
 
+from math import gcd as _gcd
 _COMB3 = list(_it.combinations(range(6), 3))
 _FCOMB3 = list(_it.combinations(range(5), 3))
 
@@ -267,8 +317,15 @@ for _svc, _villes in _SVV.items():
         if path in P:
             continue
         v = {"nom": _nom, "dep": _dep}
-        _k = (_i * 7 + len(_svc)) % len(_COMB3)
-        secs = [_loc] + [D["pool"][j] for j in _COMB3[_k]]
+        # Même principe que pour les questions : une prestation dont le vivier
+        # dépasse six sections les fait toutes tourner.
+        _c3 = _COMB3 if len(D["pool"]) <= 6 else list(_it.combinations(range(len(D["pool"])), 3))
+        # Le pas doit être premier avec le nombre de combinaisons, sinon la
+        # rotation ne parcourt qu'une fraction d'entre elles : avec 84
+        # combinaisons, un pas de 7 n'en atteint que douze.
+        _pas = next(n for n in range(7, 7 + len(_c3)) if _gcd(n, len(_c3)) == 1)
+        _k = (_i * _pas + len(_svc)) % len(_c3)
+        secs = [_loc] + [D["pool"][j] for j in _c3[_k]]
         secs.append(("Mon intervention à %s" % _nom, D["fin"][_i % len(D["fin"])] % v))
         # Les combinaisons sont calculées sur la longueur réelle de la liste :
         # une prestation qui compte six questions les fait toutes tourner.
