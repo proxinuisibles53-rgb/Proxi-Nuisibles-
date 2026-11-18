@@ -25,7 +25,7 @@ import unicodedata as _ud
 _MAXT = 60
 
 # Pages dont le titre a été écrit à la main : on n'y touche pas.
-_GARDE = {"/deratisation-laval/", "/chenilles-processionnaires/"}
+_GARDE = {"/deratisation-laval/"}
 
 
 def _slug(s):
@@ -65,6 +65,9 @@ _HUB = {
     "/deratisation/": "Dératiseur en Mayenne et Ille-et-Vilaine : rats et souris",
     "/frelons-guepes/": "Destruction de nid de frelons et de guêpes (53 et 35)",
     "/frelon-asiatique/": "Frelon asiatique : destruction du nid (53 et 35)",
+    # Le titre disait « en Mayenne » alors que quatre pages communes existent
+    # en Ille-et-Vilaine et que tout le corps de la page couvre les deux.
+    "/chenilles-processionnaires/": "Chenilles processionnaires (53 et 35) : échenillage",
     "/desinsectisation/": "Désinsectisation : cafards, puces, fourmis, mouches",
     "/blattes-cafards/": "Se débarrasser des cafards et des blattes (53 et 35)",
     "/fourmis/": "Traitement des fourmis en Mayenne et Ille-et-Vilaine",
