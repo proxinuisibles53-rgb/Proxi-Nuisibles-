@@ -109,6 +109,8 @@ _L("chenilles-processionnaires", "saint-cyr-le-gravelais", "Saint-Cyr-le-Gravela
  "Saint-Cyr-le-Gravelais est une commune voisine de celle où je suis installé. Le bocage et les jardins du bourg y portent des chênes de haie et des conifères plantés en brise-vent, qui sont les arbres les plus souvent touchés.\nÉtant à quelques minutes, je peux venir voir l'arbre rapidement et vous dire s'il s'agit vraiment d'un cocon de processionnaire ou d'autre chose. Le déplacement est compris dans le tarif.")
 _L("chenilles-processionnaires", "torce", "Torcé", "35", "Haies, exploitations et jardins",
  "À Torcé, les haies bocagères et les abords des exploitations comptent des chênes anciens, et les jardins du bourg quelques pins d'agrément. Dans une cour de ferme, ce sont souvent les chiens qui alertent les premiers, en flairant une file de chenilles au sol.\nUn chien qui a léché une chenille est une urgence vétérinaire. Pour l'arbre, appelez-moi : je pose un piège sur le tronc ou je coupe le cocon selon la saison.")
+_L("chenilles-processionnaires", "thorigne-fouillard", "Thorigné-Fouillard", "35", "Adossée à la forêt de Rennes",
+ "À Thorigné-Fouillard, la lisière de la forêt de Rennes borde les quartiers résidentiels. Les papillons sortent du massif en été et pondent sur les premiers arbres isolés qu'ils trouvent : les chênes des haies et les conifères plantés dans les jardins des lotissements.\nSur chêne, le cocon est plat et plaqué contre le tronc ou une grosse branche : on passe devant sans le voir. Je le retire à l'aspirateur, en sac fermé, sans rien pulvériser dans votre terrain.")
 
 # ======================= TAUPIER =======================
 _L("taupier", "laval", "Laval", "53", "Pelouses et jardins à Laval",
