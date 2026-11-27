@@ -1434,6 +1434,20 @@ _REDIR = [
     ("/d%C3%A9ratisationvitr%C3%A9/", "/deratisation-vitre/"),
     ("/destructionniddeguêpesvitré/", "/frelons-guepes-vitre/"),
     ("/destructionniddegu%C3%AApesvitr%C3%A9/", "/frelons-guepes-vitre/"),
+    # 404 relevés le 27/11/2026 : l'ancienne arborescence /prestations/ de Wix.
+    # Les règles précises passent avant le motif générique : Cloudflare applique
+    # la première qui correspond.
+    ("/prestations/dératisation/", "/deratisation/"),
+    ("/prestations/d%C3%A9ratisation/", "/deratisation/"),
+    ("/prestations/désinsectisation/", "/desinsectisation/"),
+    ("/prestations/d%C3%A9sinsectisation/", "/desinsectisation/"),
+    ("/prestations/guêpes-et-frelons/", "/frelons-guepes/"),
+    ("/prestations/gu%C3%AApes-et-frelons/", "/frelons-guepes/"),
+    ("/prestations/", "/"),
+    ("/prestations/*", "/"),
+    ("/about/", "/qui-suis-je/"),
+    ("/galerie-photos/", "/"),
+    ("/sitemap/", "/"),
 ]
 open(OUT + "/_redirects", "w", encoding="utf-8").write(
     "".join("%s %s 301\n" % (a, b) for a, b in _REDIR))
