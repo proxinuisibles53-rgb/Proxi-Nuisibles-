@@ -7,6 +7,18 @@ CERT_NUM = "059860"
 TEL_D, TEL, MAIL = "06 64 57 66 55", "+33664576655", "proxinuisibles53@gmail.com"
 OUT = "/home/claude/site"
 
+# Les autres endroits où l'entreprise existe. Sert au champ sameAs des données
+# structurées : c'est ce qui permet à un moteur ou à une IA de rattacher le site
+# à la fiche Google et aux réseaux, plutôt que d'y voir des entités distinctes.
+PLACE_ID = "ChIJNz0w97RLa6UR206AJMBfdTY"
+SAME_AS = [
+    "https://www.google.com/maps/place/?q=place_id:" + PLACE_ID,
+    "https://www.facebook.com/share/1EBWyXPqMn/",
+    "https://www.instagram.com/proxinuisibles",
+]
+GEO = {"@type": "GeoCoordinates", "latitude": 48.1157303, "longitude": -0.9694453}
+SIRET = "98424277600016"
+
 import re
 import unicodedata
 
@@ -993,7 +1005,11 @@ def render(path, d):
           "openingHoursSpecification": [
               {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "08:00", "closes": "21:00"},
               {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday", "Sunday"], "opens": "09:00", "closes": "18:00"}],
-          "paymentAccepted": "Carte bancaire, espèces, chèque, virement", "priceRange": "$$"}
+          "paymentAccepted": "Carte bancaire, espèces, chèque, virement", "priceRange": "$$",
+          "sameAs": SAME_AS, "geo": GEO,
+          "image": BASE + "/logo.webp", "logo": BASE + "/logo.webp",
+          "vatID": "FR34984242776",
+          "identifier": {"@type": "PropertyValue", "propertyID": "SIRET", "value": SIRET}}
     scripts = ['<script type="application/ld+json">%s</script>' % json.dumps(ld, ensure_ascii=False)]
     if d["kind"] == "home":
         site_ld = {"@context": "https://schema.org", "@type": "WebSite", "name": "Proxinuisibles",
